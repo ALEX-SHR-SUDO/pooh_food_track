@@ -6,40 +6,60 @@
 
 body {
     font-family: 'Sarabun', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* Thai-inspired background with golden silk pattern effect */
-    background: linear-gradient(135deg, rgba(218, 165, 32, 0.1) 0%, rgba(184, 134, 11, 0.1) 100%),
-                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(218, 165, 32, 0.03) 35px, rgba(218, 165, 32, 0.03) 70px),
-                linear-gradient(to bottom, #8B4513 0%, #D2691E 50%, #CD853F 100%);
+    /* Thai national flag inspired background with silk pattern effect */
+    background: linear-gradient(135deg, rgba(161, 28, 35, 0.05) 0%, rgba(45, 55, 110, 0.05) 50%, rgba(161, 28, 35, 0.05) 100%),
+                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(218, 165, 32, 0.02) 35px, rgba(218, 165, 32, 0.02) 70px),
+                linear-gradient(to bottom, #f8f9fa 0%, #e8eef5 50%, #f8f9fa 100%);
     background-attachment: fixed;
     min-height: 100vh;
     padding: 20px;
     position: relative;
 }
 
-/* Thai temple roof inspired decoration */
+/* Thai national flag inspired decoration - Red stripe */
 body::before {
     content: '';
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: 10px;
-    background: linear-gradient(90deg, #DAA520 0%, #FFD700 25%, #DAA520 50%, #FFD700 75%, #DAA520 100%);
+    height: 15px;
+    background: linear-gradient(to bottom, 
+                #A11C23 0%, 
+                #A11C23 40%, 
+                rgba(255, 255, 255, 0.9) 40%, 
+                rgba(255, 255, 255, 0.9) 50%,
+                #2D376E 50%,
+                #2D376E 60%,
+                rgba(255, 255, 255, 0.9) 60%,
+                rgba(255, 255, 255, 0.9) 70%,
+                #A11C23 70%,
+                #A11C23 100%);
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(218, 165, 32, 0.5);
+    box-shadow: 0 3px 15px rgba(45, 55, 110, 0.4);
 }
 
-/* Thai pattern decoration */
+/* Thai national flag inspired decoration - Red stripe */
 body::after {
     content: '';
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 10px;
-    background: linear-gradient(90deg, #DAA520 0%, #FFD700 25%, #DAA520 50%, #FFD700 75%, #DAA520 100%);
+    height: 15px;
+    background: linear-gradient(to bottom, 
+                #A11C23 0%, 
+                #A11C23 30%, 
+                rgba(255, 255, 255, 0.9) 30%, 
+                rgba(255, 255, 255, 0.9) 40%,
+                #2D376E 40%,
+                #2D376E 60%,
+                rgba(255, 255, 255, 0.9) 60%,
+                rgba(255, 255, 255, 0.9) 70%,
+                #A11C23 70%,
+                #A11C23 100%);
     z-index: 1000;
-    box-shadow: 0 -2px 10px rgba(218, 165, 32, 0.5);
+    box-shadow: 0 -3px 15px rgba(45, 55, 110, 0.4);
 }
 
 .container {
@@ -47,38 +67,73 @@ body::after {
     margin: 0 auto;
     background: rgba(255, 255, 255, 0.98);
     border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(139, 69, 19, 0.4);
+    box-shadow: 0 20px 60px rgba(45, 55, 110, 0.3);
     overflow: hidden;
-    border: 3px solid rgba(218, 165, 32, 0.3);
+    border: 4px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+}
+
+/* Thai flag inspired border */
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 20px;
+    padding: 4px;
+    background: linear-gradient(135deg, 
+                #A11C23 0%, 
+                #2D376E 25%, 
+                #DAA520 50%, 
+                #2D376E 75%, 
+                #A11C23 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    z-index: -1;
 }
 
 header {
-    /* Thai temple inspired gradient with gold accents */
-    background: linear-gradient(135deg, #DC143C 0%, #8B0000 50%, #DC143C 100%);
+    /* Thai national colors inspired gradient */
+    background: linear-gradient(135deg, 
+                #A11C23 0%, 
+                #2D376E 50%, 
+                #A11C23 100%),
+                linear-gradient(to right, rgba(218, 165, 32, 0.1) 0%, transparent 50%, rgba(218, 165, 32, 0.1) 100%);
+    background-blend-mode: normal;
     color: white;
-    padding: 30px;
+    padding: 35px 30px;
     text-align: center;
     position: relative;
-    border-bottom: 5px solid #DAA520;
+    border-bottom: 6px double rgba(218, 165, 32, 0.8);
+    box-shadow: inset 0 -2px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Decorative Thai pattern in header */
+/* Decorative Thai pattern in header - Royal symbols */
 header::before {
-    content: '☸ ✦ ☸';
+    content: '✦ ☸ ✦ ๛ ✦ ☸ ✦';
     position: absolute;
-    top: 10px;
+    top: 8px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 1.2em;
+    font-size: 1.1em;
     color: #FFD700;
-    opacity: 0.8;
+    opacity: 0.9;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    letter-spacing: 8px;
 }
 
 header h1 {
     font-size: 2.5em;
     margin-bottom: 10px;
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.3);
-    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 
+                 0 0 15px rgba(218, 165, 32, 0.4),
+                 0 0 30px rgba(45, 55, 110, 0.2);
+    letter-spacing: 2px;
+    font-weight: 700;
 }
 
 header p {
@@ -92,7 +147,10 @@ header p {
     grid-template-columns: 1fr 1fr;
     gap: 30px;
     padding: 30px;
-    background: linear-gradient(to bottom, rgba(255, 248, 220, 0.3) 0%, rgba(255, 255, 255, 0.3) 100%);
+    background: linear-gradient(to bottom, 
+                rgba(248, 249, 250, 0.5) 0%, 
+                rgba(255, 255, 255, 0.8) 50%,
+                rgba(248, 249, 250, 0.5) 100%);
 }
 
 @media (max-width: 768px) {
@@ -102,20 +160,56 @@ header p {
 }
 
 .menu-section, .order-section {
-    background: linear-gradient(135deg, rgba(255, 248, 220, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%);
+    background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.95) 0%, 
+                rgba(248, 249, 250, 0.95) 100%);
     padding: 25px;
     border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(139, 69, 19, 0.15);
-    border: 2px solid rgba(218, 165, 32, 0.2);
+    box-shadow: 0 6px 20px rgba(45, 55, 110, 0.15);
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+}
+
+.menu-section::before, .order-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 15px;
+    padding: 3px;
+    background: linear-gradient(135deg, 
+                rgba(161, 28, 35, 0.3) 0%, 
+                rgba(218, 165, 32, 0.4) 50%, 
+                rgba(45, 55, 110, 0.3) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    z-index: -1;
 }
 
 h2 {
-    color: #8B0000;
+    color: #2D376E;
     margin-bottom: 20px;
     font-size: 1.8em;
-    border-bottom: 3px solid #DAA520;
-    padding-bottom: 10px;
-    text-shadow: 1px 1px 2px rgba(218, 165, 32, 0.3);
+    border-bottom: 4px double #DAA520;
+    padding-bottom: 12px;
+    text-shadow: 1px 1px 2px rgba(218, 165, 32, 0.2);
+    font-weight: 700;
+    position: relative;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(to right, #A11C23, #2D376E);
+    border-radius: 2px;
 }
 
 .category {
@@ -123,29 +217,48 @@ h2 {
 }
 
 .category h3 {
-    color: #DC143C;
+    color: #A11C23;
     margin-bottom: 15px;
     font-size: 1.4em;
-    text-shadow: 1px 1px 2px rgba(218, 165, 32, 0.2);
+    text-shadow: 1px 1px 2px rgba(45, 55, 110, 0.2);
+    font-weight: 600;
 }
 
 .menu-item {
-    background: white;
+    background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(248, 249, 250, 1) 100%);
     padding: 15px;
     margin-bottom: 12px;
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(139, 69, 19, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-    border-left: 4px solid #DAA520;
+    box-shadow: 0 3px 6px rgba(45, 55, 110, 0.12);
+    transition: transform 0.2s, box-shadow 0.2s, border-left-color 0.2s;
+    border-left: 5px solid #DAA520;
+    position: relative;
+}
+
+.menu-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 0;
+    background: linear-gradient(to bottom, #A11C23, #2D376E);
+    transition: height 0.2s;
+    border-radius: 0 2px 2px 0;
 }
 
 .menu-item:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(218, 165, 32, 0.3);
-    border-left-color: #DC143C;
+    box-shadow: 0 6px 15px rgba(45, 55, 110, 0.25);
+    border-left-color: transparent;
+}
+
+.menu-item:hover::before {
+    height: 60%;
 }
 
 .item-info {
@@ -160,28 +273,48 @@ h2 {
 }
 
 .item-price {
-    color: #DC143C;
+    color: #A11C23;
     font-weight: bold;
     font-size: 1.1em;
 }
 
 .add-btn {
-    background: linear-gradient(135deg, #DC143C 0%, #8B0000 100%);
+    background: linear-gradient(135deg, #A11C23 0%, #2D376E 100%);
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 22px;
     border-radius: 25px;
     cursor: pointer;
     font-size: 1em;
     font-weight: bold;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 2px 4px rgba(139, 0, 0, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+    box-shadow: 0 3px 8px rgba(45, 55, 110, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.add-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(218, 165, 32, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+}
+
+.add-btn:hover::before {
+    width: 300px;
+    height: 300px;
 }
 
 .add-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(220, 20, 60, 0.4);
-    background: linear-gradient(135deg, #FF1744 0%, #C62828 100%);
+    box-shadow: 0 5px 15px rgba(45, 55, 110, 0.5);
+    background: linear-gradient(135deg, #C62035 0%, #3A4580 100%);
 }
 
 .add-btn:active {
@@ -195,15 +328,32 @@ h2 {
 }
 
 .order-item {
-    background: white;
+    background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(248, 249, 250, 1) 100%);
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(139, 69, 19, 0.1);
-    border-left: 4px solid #DAA520;
+    box-shadow: 0 3px 6px rgba(45, 55, 110, 0.12);
+    border-left: 5px solid #2D376E;
+    position: relative;
+}
+
+.order-item::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    background: linear-gradient(to bottom, #A11C23, #DAA520);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.order-item:hover::after {
+    opacity: 1;
 }
 
 .order-item-info {
@@ -227,21 +377,24 @@ h2 {
 }
 
 .qty-btn {
-    background: linear-gradient(135deg, #DC143C 0%, #8B0000 100%);
+    background: linear-gradient(135deg, #2D376E 0%, #A11C23 100%);
     color: white;
-    border: none;
-    width: 30px;
-    height: 30px;
+    border: 2px solid rgba(218, 165, 32, 0.3);
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     cursor: pointer;
     font-size: 1.2em;
     font-weight: bold;
-    transition: background 0.2s;
-    box-shadow: 0 2px 4px rgba(139, 0, 0, 0.2);
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(45, 55, 110, 0.3);
 }
 
 .qty-btn:hover {
-    background: linear-gradient(135deg, #FF1744 0%, #C62828 100%);
+    background: linear-gradient(135deg, #3A4580 0%, #C62035 100%);
+    transform: scale(1.1);
+    box-shadow: 0 3px 10px rgba(45, 55, 110, 0.4);
+    border-color: rgba(218, 165, 32, 0.6);
 }
 
 .quantity {
@@ -268,11 +421,32 @@ h2 {
 }
 
 .order-summary {
-    background: white;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 249, 250, 0.98) 100%);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(139, 69, 19, 0.1);
-    border: 2px solid rgba(218, 165, 32, 0.2);
+    box-shadow: 0 4px 12px rgba(45, 55, 110, 0.15);
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+}
+
+.order-summary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 10px;
+    padding: 3px;
+    background: linear-gradient(135deg, 
+                #A11C23 0%, 
+                #DAA520 50%, 
+                #2D376E 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    z-index: -1;
 }
 
 .summary-row {
@@ -283,33 +457,60 @@ h2 {
 }
 
 .summary-row.total {
-    border-top: 2px solid #DAA520;
-    padding-top: 10px;
-    margin-top: 10px;
+    border-top: 3px double #DAA520;
+    padding-top: 12px;
+    margin-top: 12px;
     font-weight: bold;
     font-size: 1.3em;
-    color: #DC143C;
+    color: #2D376E;
+    background: linear-gradient(to right, 
+                rgba(161, 28, 35, 0.05) 0%, 
+                rgba(218, 165, 32, 0.05) 50%,
+                rgba(45, 55, 110, 0.05) 100%);
+    padding: 12px;
+    border-radius: 8px;
+    margin: 12px -10px 0 -10px;
 }
 
 .confirm-btn {
     width: 100%;
-    background: linear-gradient(135deg, #DAA520 0%, #B8860B 100%);
+    background: linear-gradient(135deg, #DAA520 0%, #2D376E 50%, #A11C23 100%);
     color: white;
-    border: none;
-    padding: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 16px;
     border-radius: 25px;
     font-size: 1.2em;
     font-weight: bold;
     cursor: pointer;
     margin-top: 15px;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 4px 8px rgba(218, 165, 32, 0.3);
+    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(45, 55, 110, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.confirm-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent);
+    transition: left 0.5s;
+}
+
+.confirm-btn:hover::before {
+    left: 100%;
 }
 
 .confirm-btn:hover {
-    transform: scale(1.02);
-    box-shadow: 0 6px 12px rgba(218, 165, 32, 0.5);
-    background: linear-gradient(135deg, #FFD700 0%, #DAA520 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(45, 55, 110, 0.6);
+    background: linear-gradient(135deg, #FFD700 0%, #3A4580 50%, #C62035 100%);
 }
 
 .confirm-btn:disabled {
@@ -327,16 +528,16 @@ h2 {
 }
 
 .success-message {
-    background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+    background: linear-gradient(135deg, #2D376E 0%, #4caf50 50%, #DAA520 100%);
     color: white;
-    padding: 15px;
-    border-radius: 10px;
+    padding: 20px;
+    border-radius: 12px;
     margin-bottom: 20px;
     text-align: center;
     font-weight: bold;
     animation: slideDown 0.3s ease-out;
-    box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
-    border: 2px solid rgba(218, 165, 32, 0.3);
+    box-shadow: 0 6px 20px rgba(45, 55, 110, 0.4);
+    border: 3px solid rgba(218, 165, 32, 0.5);
 }
 
 @keyframes slideDown {
