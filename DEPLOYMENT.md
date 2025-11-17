@@ -35,21 +35,15 @@ vercel
 
 ## Configuration
 
-The project includes a `vercel.json` file that configures the deployment:
+The project includes a minimal `vercel.json` file:
 
 ```json
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "index.html",
-      "use": "@vercel/static"
-    }
-  ]
+  "version": 2
 }
 ```
 
-This configuration tells Vercel to serve the site as static files.
+Vercel automatically detects and serves this project as a static site without requiring explicit build configuration.
 
 ## Custom Domain
 
