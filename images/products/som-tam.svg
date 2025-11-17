@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Som Tam (Papaya salad) -->
+  <circle cx="100" cy="100" r="90" fill="#F5DEB3"/>
+  <circle cx="100" cy="100" r="85" fill="#FFF8DC"/>
+  
+  <!-- Plate -->
+  <ellipse cx="100" cy="120" rx="70" ry="18" fill="#FFE4C4"/>
+  <ellipse cx="100" cy="100" rx="60" ry="45" fill="#98FB98" opacity="0.6"/>
+  
+  <!-- Shredded papaya -->
+  <path d="M 60,90 L 65,110" stroke="#90EE90" stroke-width="2"/>
+  <path d="M 70,85 L 75,105" stroke="#90EE90" stroke-width="2"/>
+  <path d="M 80,90 L 85,110" stroke="#90EE90" stroke-width="2"/>
+  <path d="M 90,85 L 95,105" stroke="#90EE90" stroke-width="2"/>
+  <path d="M 100,90 L 105,110" stroke="#90EE90" stroke-width="2"/>
+  <path d="M 110,85 L 115,105" stroke="#90EE90" stroke-width="2"/>
+  <path d="M 120,90 L 125,110" stroke="#90EE90" stroke-width="2"/>
+  <path d="M 130,85 L 135,105" stroke="#90EE90" stroke-width="2"/>
+  
+  <!-- Tomatoes -->
+  <circle cx="75" cy="95" r="6" fill="#FF6347"/>
+  <circle cx="125" cy="100" r="6" fill="#FF6347"/>
+  
+  <!-- Peanuts -->
+  <ellipse cx="85" cy="110" rx="4" ry="5" fill="#D2B48C"/>
+  <ellipse cx="115" cy="105" rx="4" ry="5" fill="#D2B48C"/>
+  
+  <!-- Chilies -->
+  <ellipse cx="95" cy="100" rx="3" ry="7" fill="#FF4500"/>
+  <ellipse cx="105" cy="95" rx="3" ry="7" fill="#FF4500"/>
+  
+  <text x="100" y="180" font-size="16" fill="#A11C23" text-anchor="middle" font-weight="bold">ส้มตำ</text>
+</svg>

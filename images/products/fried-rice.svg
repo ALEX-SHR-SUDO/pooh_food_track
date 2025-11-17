@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Fried Rice -->
+  <circle cx="100" cy="100" r="90" fill="#F5DEB3"/>
+  <circle cx="100" cy="100" r="85" fill="#FFF8DC"/>
+  
+  <!-- Rice mound -->
+  <ellipse cx="100" cy="110" rx="55" ry="45" fill="#FFE4B5"/>
+  
+  <!-- Rice grains texture -->
+  <circle cx="85" cy="100" r="2" fill="#F0E68C"/>
+  <circle cx="95" cy="105" r="2" fill="#F0E68C"/>
+  <circle cx="105" cy="100" r="2" fill="#F0E68C"/>
+  <circle cx="115" cy="105" r="2" fill="#F0E68C"/>
+  <circle cx="90" cy="115" r="2" fill="#F0E68C"/>
+  <circle cx="110" cy="115" r="2" fill="#F0E68C"/>
+  
+  <!-- Vegetables and protein -->
+  <circle cx="80" cy="95" r="5" fill="#FF6347"/>
+  <circle cx="120" cy="100" r="5" fill="#98FB98"/>
+  <ellipse cx="100" cy="90" rx="8" ry="6" fill="#FFA07A"/>
+  
+  <!-- Egg pieces -->
+  <ellipse cx="90" cy="120" rx="6" ry="4" fill="#FFD700"/>
+  <ellipse cx="110" cy="120" rx="6" ry="4" fill="#FFD700"/>
+  
+  <text x="100" y="180" font-size="16" fill="#A11C23" text-anchor="middle" font-weight="bold">ข้าวผัด</text>
+</svg>
