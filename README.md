@@ -1,9 +1,11 @@
 # ร้านอาหารไทยพื้นบ้าน - ระบบติดตามอาหาร 🍜
 
-## คำอธิบาย
-เว็บแอปพลิเคชันสำหรับร้านอาหารไทยพื้นบ้าน ที่ช่วยในการติดตามและสั่งอาหารออนไลน์ พัฒนาด้วย HTML, CSS และ JavaScript
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ALEX-SHR-SUDO/pooh_food_track)
 
-## คุณสมบัติ
+## คำอธิบาย
+เว็บแอปพลิเคชันสำหรับร้านอาหารไทยพื้นบ้าน ที่ช่วยในการติดตามและสั่งอาหารออนไลน์ พัฒนาด้วย HTML, CSS และ JavaScript แบบมืออาชีพ พร้อมธีมสีและลวดลายไทยแท้
+
+## 🌟 คุณสมบัติ
 - 📋 แสดงเมนูอาหารไทยพื้นบ้านหลากหลายประเภท
 - 🛒 ระบบตะกร้าสั่งอาหารที่ใช้งานง่าย
 - ➕ ➖ ปรับจำนวนอาหารได้สะดวก
@@ -11,6 +13,8 @@
 - ✅ ยืนยันคำสั่งซื้อและได้รับหมายเลขคำสั่งซื้อ
 - 📱 รองรับการใช้งานบนมือถือ (Responsive Design)
 - 🇹🇭 ภาษาไทยทั้งหมด
+- 🎨 **ธีมสีทองและน้ำตาลแบบไทย พร้อมลวดลายผ้าไหมไทย**
+- 🏛️ **ออกแบบตามสถาปัตยกรรมวัดไทย**
 
 ## เมนูอาหาร
 
@@ -39,14 +43,55 @@
 5. กดปุ่ม "ยืนยันคำสั่งซื้อ" เพื่อทำการสั่งอาหาร
 6. รับหมายเลขคำสั่งซื้อและรอรับอาหาร
 
-## เทคโนโลยีที่ใช้
-- HTML5
-- CSS3 (Gradient, Flexbox, Grid, Animations)
-- JavaScript (ES6+)
+## 🚀 เทคโนโลยีที่ใช้
+- HTML5 (Semantic markup with SEO optimization)
+- CSS3 (Gradient, Flexbox, Grid, Animations, Thai-inspired design)
+- JavaScript (ES6+ with OOP patterns)
+- Professional code structure (separated files)
 - Responsive Design
+- Vercel deployment ready
 
-## การติดตั้ง
+## 📁 โครงสร้างโปรเจค
+```
+pooh_food_track/
+├── index.html          # Main HTML file
+├── styles.css          # Professional CSS with Thai theme
+├── script.js           # JavaScript with OOP structure
+├── vercel.json         # Vercel deployment configuration
+├── README.md           # Project documentation
+└── DEPLOYMENT.md       # Vercel deployment guide
+```
+
+## 🎨 Thai Cultural Design Elements
+- **Golden/Brown Color Scheme**: Inspired by Thai temples and silk
+- **Thai Temple Roof Pattern**: Top and bottom decorative borders
+- **Thai Silk Texture**: Background pattern resembling traditional Thai silk
+- **Red & Gold Accents**: Traditional Thai ceremonial colors
+- **Buddhist Symbols**: ☸ ✦ decorative elements
+
+## 💻 การติดตั้งและใช้งาน
+
+### Local Development
 ไม่จำเป็นต้องติดตั้งอะไร เพียงแค่เปิดไฟล์ `index.html` ในเว็บเบราว์เซอร์
+
+หรือใช้ local server:
+```bash
+# Using Python
+python -m http.server 8080
+
+# Using Node.js
+npx http-server
+```
+
+### Deploy to Vercel
+ดูคู่มือการ deploy ที่ [DEPLOYMENT.md](DEPLOYMENT.md)
+
+## 📸 Screenshots
+![Thai Food Tracking System](https://github.com/user-attachments/assets/184790d9-fdeb-4529-8c4b-e09e7b3fbff9)
+*Main interface with Thai cultural background*
+
+![Order Management](https://github.com/user-attachments/assets/8f5c0b07-cde4-4459-bf93-d2962c639dcd)
+*Order management with golden theme*
 
 ## ใบอนุญาต
 MIT License
