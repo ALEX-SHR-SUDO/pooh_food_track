@@ -6,10 +6,13 @@
 
 body {
     font-family: 'Sarabun', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* Thai national flag inspired background with silk pattern effect */
-    background: linear-gradient(135deg, rgba(161, 28, 35, 0.05) 0%, rgba(45, 55, 110, 0.05) 50%, rgba(161, 28, 35, 0.05) 100%),
-                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(218, 165, 32, 0.02) 35px, rgba(218, 165, 32, 0.02) 70px),
-                linear-gradient(to bottom, #f8f9fa 0%, #e8eef5 50%, #f8f9fa 100%);
+    /* Enhanced professional background with Thai silk pattern effect */
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(218, 165, 32, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(45, 55, 110, 0.08) 0%, transparent 50%),
+        repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(218, 165, 32, 0.03) 40px, rgba(218, 165, 32, 0.03) 80px),
+        repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(161, 28, 35, 0.02) 40px, rgba(161, 28, 35, 0.02) 80px),
+        linear-gradient(135deg, #f8f9fa 0%, #ffffff 25%, #e8eef5 50%, #ffffff 75%, #f8f9fa 100%);
     background-attachment: fixed;
     min-height: 100vh;
     padding: 20px;
@@ -67,14 +70,16 @@ body::after {
     margin: 0 auto;
     background: rgba(255, 255, 255, 0.98);
     border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(45, 55, 110, 0.3);
+    box-shadow: 
+        0 20px 60px rgba(45, 55, 110, 0.3),
+        0 10px 30px rgba(161, 28, 35, 0.1);
     overflow: hidden;
     border: 4px solid transparent;
     background-clip: padding-box;
     position: relative;
 }
 
-/* Thai flag inspired border */
+/* Enhanced Thai flag inspired border with animation */
 .container::before {
     content: '';
     position: absolute;
@@ -86,136 +91,176 @@ body::after {
     padding: 4px;
     background: linear-gradient(135deg, 
                 #A11C23 0%, 
-                #2D376E 25%, 
-                #DAA520 50%, 
-                #2D376E 75%, 
+                #2D376E 20%, 
+                #DAA520 40%,
+                #FFD700 50%,
+                #DAA520 60%,
+                #2D376E 80%, 
                 #A11C23 100%);
+    background-size: 200% 200%;
+    animation: borderGlow 8s ease-in-out infinite;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     z-index: -1;
 }
 
+@keyframes borderGlow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
 header {
-    /* Thai national colors inspired gradient */
-    background: linear-gradient(135deg, 
-                #A11C23 0%, 
-                #2D376E 50%, 
-                #A11C23 100%),
-                linear-gradient(to right, rgba(218, 165, 32, 0.1) 0%, transparent 50%, rgba(218, 165, 32, 0.1) 100%);
-    background-blend-mode: normal;
+    /* Enhanced professional gradient with Thai national colors */
+    background: 
+        linear-gradient(135deg, rgba(218, 165, 32, 0.15) 0%, transparent 30%, transparent 70%, rgba(218, 165, 32, 0.15) 100%),
+        linear-gradient(135deg, #A11C23 0%, #8B1A2E 20%, #2D376E 50%, #8B1A2E 80%, #A11C23 100%);
+    background-size: 100% 100%, 100% 100%;
     color: white;
-    padding: 35px 30px;
+    padding: 50px 40px;
     text-align: center;
     position: relative;
-    border-bottom: 6px double rgba(218, 165, 32, 0.8);
-    box-shadow: inset 0 -2px 10px rgba(0, 0, 0, 0.2);
+    border-bottom: 6px solid transparent;
+    border-image: linear-gradient(to right, #DAA520, #FFD700, #DAA520) 1;
+    box-shadow: 
+        inset 0 -2px 20px rgba(0, 0, 0, 0.2),
+        0 10px 30px rgba(45, 55, 110, 0.3);
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 20px;
+    overflow: hidden;
 }
 
-/* Royal portraits container */
-.royal-portraits {
-    display: flex;
-    gap: 15px;
-    position: absolute;
-    left: 30px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.royal-portrait {
-    width: 80px;
-    height: 96px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4),
-                0 0 20px rgba(218, 165, 32, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 3px solid rgba(218, 165, 32, 0.8);
-}
-
-.royal-portrait-couple {
-    width: 100px;
-    height: 100px;
-}
-
-.royal-portrait:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5),
-                0 0 30px rgba(218, 165, 32, 0.5);
-}
-
+/* Header content styling */
 .header-content {
     flex: 1;
     text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Header decorative element */
+.header-decoration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+    opacity: 0.95;
+}
+
+.decoration-line {
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #FFD700, transparent);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.decoration-symbol {
+    font-size: 1.5em;
+    color: #FFD700;
+    text-shadow: 
+        0 0 10px rgba(255, 215, 0, 0.8),
+        0 0 20px rgba(255, 215, 0, 0.5),
+        2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: sparkle 3s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+    0%, 100% { 
+        opacity: 0.9;
+        transform: scale(1) rotate(0deg);
+    }
+    50% { 
+        opacity: 1;
+        transform: scale(1.1) rotate(180deg);
+    }
 }
 
 @media (max-width: 768px) {
     header {
         flex-direction: column;
-        padding: 25px 20px;
+        padding: 35px 25px;
     }
     
-    .royal-portraits {
-        position: static;
-        transform: none;
-        margin-bottom: 15px;
-    }
-    
-    .royal-portrait {
+    .decoration-line {
         width: 60px;
-        height: 72px;
-    }
-    
-    .royal-portrait-couple {
-        width: 80px;
-        height: 80px;
-    }
-    
-    .royal-portrait:hover {
-        transform: scale(1.05);
     }
 }
 
-/* Decorative Thai pattern in header - Royal symbols */
+/* Enhanced decorative Thai pattern in header */
 header::before {
     content: '✦ ☸ ✦ ๛ ✦ ☸ ✦';
     position: absolute;
-    top: 8px;
+    top: 12px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 1.1em;
+    font-size: 1.3em;
     color: #FFD700;
-    opacity: 0.9;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-    letter-spacing: 8px;
+    opacity: 0.95;
+    text-shadow: 
+        1px 1px 3px rgba(0, 0, 0, 0.5),
+        0 0 10px rgba(255, 215, 0, 0.6);
+    letter-spacing: 12px;
+    z-index: 2;
+}
+
+/* Decorative corner accents */
+header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at top left, rgba(255, 215, 0, 0.1) 0%, transparent 25%),
+        radial-gradient(circle at top right, rgba(255, 215, 0, 0.1) 0%, transparent 25%),
+        radial-gradient(circle at bottom left, rgba(218, 165, 32, 0.08) 0%, transparent 25%),
+        radial-gradient(circle at bottom right, rgba(218, 165, 32, 0.08) 0%, transparent 25%);
+    pointer-events: none;
+    z-index: 0;
 }
 
 .header-content h1 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 
-                 0 0 15px rgba(218, 165, 32, 0.4),
-                 0 0 30px rgba(45, 55, 110, 0.2);
-    letter-spacing: 2px;
+    font-size: 3em;
+    margin-bottom: 12px;
+    text-shadow: 
+        3px 3px 6px rgba(0, 0, 0, 0.6), 
+        0 0 20px rgba(218, 165, 32, 0.5),
+        0 0 40px rgba(45, 55, 110, 0.3);
+    letter-spacing: 3px;
     font-weight: 700;
+    line-height: 1.2;
+    position: relative;
+    z-index: 1;
 }
 
 .header-content p {
-    font-size: 1.2em;
-    opacity: 0.95;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-size: 1.4em;
+    opacity: 0.98;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.5),
+        0 0 10px rgba(0, 0, 0, 0.3);
+    font-weight: 400;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
 }
 
 @media (max-width: 768px) {
     .header-content h1 {
-        font-size: 1.8em;
+        font-size: 2em;
+        letter-spacing: 2px;
     }
     
     .header-content p {
-        font-size: 1em;
+        font-size: 1.1em;
+    }
+    
+    .decoration-symbol {
+        font-size: 1.2em;
     }
 }
 
