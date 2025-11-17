@@ -132,6 +132,20 @@ header {
     overflow: hidden;
 }
 
+/* Header image styling */
+.header-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 
+        0 8px 24px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(255, 215, 0, 0.3);
+    border: 5px solid rgba(255, 215, 0, 0.8);
+    position: relative;
+    z-index: 1;
+}
+
 /* Header content styling */
 .header-content {
     flex: 1;
@@ -182,6 +196,12 @@ header {
     header {
         flex-direction: column;
         padding: 35px 25px;
+    }
+    
+    .header-image {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 15px;
     }
     
     .decoration-line {
