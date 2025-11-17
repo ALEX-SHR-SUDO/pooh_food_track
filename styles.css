@@ -136,8 +136,13 @@ header {
     border: 3px solid rgba(218, 165, 32, 0.8);
 }
 
+.royal-portrait-couple {
+    width: 100px;
+    height: 100px;
+}
+
 .royal-portrait:hover {
-    transform: translateY(-50%) scale(1.05);
+    transform: scale(1.05);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5),
                 0 0 30px rgba(218, 165, 32, 0.5);
 }
@@ -162,6 +167,11 @@ header {
     .royal-portrait {
         width: 60px;
         height: 72px;
+    }
+    
+    .royal-portrait-couple {
+        width: 80px;
+        height: 80px;
     }
     
     .royal-portrait:hover {
