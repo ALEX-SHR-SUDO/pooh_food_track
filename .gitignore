@@ -1,5 +1,6 @@
 # Temporary files
 /tmp/
+screenshots/
 
 # OS files
 .DS_Store
