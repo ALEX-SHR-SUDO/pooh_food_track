@@ -11,8 +11,14 @@
 <body>
     <div class="container">
         <header>
-            <h1>🍜 ร้านอาหารไทยพื้นบ้าน</h1>
-            <p>ระบบติดตามและสั่งอาหารออนไลน์</p>
+            <div class="royal-portraits">
+                <img src="images/royal/king.svg" alt="King Bhumibol Adulyadej (Rama IX)" class="royal-portrait">
+                <img src="images/royal/queen.svg" alt="Queen Sirikit" class="royal-portrait">
+            </div>
+            <div class="header-content">
+                <h1>🍜 ร้านอาหารไทยพื้นบ้าน</h1>
+                <p>ระบบติดตามและสั่งอาหารออนไลน์</p>
+            </div>
         </header>
 
         <div class="main-content">
@@ -22,6 +28,7 @@
                 <div class="category">
                     <h3>🍲 อาหารจานหลัก</h3>
                     <div class="menu-item" data-id="1" data-name="ผัดไทย" data-price="45">
+                        <img src="images/products/pad-thai.svg" alt="ผัดไทย" class="product-image">
                         <div class="item-info">
                             <div class="item-name">ผัดไทย</div>
                             <div class="item-price">45 บาท</div>
@@ -29,6 +36,7 @@
                         <button class="add-btn" onclick="addToOrder(1)">เพิ่ม</button>
                     </div>
                     <div class="menu-item" data-id="2" data-name="ผัดกะเพรา" data-price="50">
+                        <img src="images/products/pad-krapow.svg" alt="ผัดกะเพรา" class="product-image">
                         <div class="item-info">
                             <div class="item-name">ผัดกะเพรา</div>
                             <div class="item-price">50 บาท</div>
@@ -36,6 +44,7 @@
                         <button class="add-btn" onclick="addToOrder(2)">เพิ่ม</button>
                     </div>
                     <div class="menu-item" data-id="3" data-name="ข้าวผัด" data-price="40">
+                        <img src="images/products/fried-rice.svg" alt="ข้าวผัด" class="product-image">
                         <div class="item-info">
                             <div class="item-name">ข้าวผัด</div>
                             <div class="item-price">40 บาท</div>
@@ -43,6 +52,7 @@
                         <button class="add-btn" onclick="addToOrder(3)">เพิ่ม</button>
                     </div>
                     <div class="menu-item" data-id="4" data-name="ต้มยำกุ้ง" data-price="80">
+                        <img src="images/products/tom-yum.svg" alt="ต้มยำกุ้ง" class="product-image">
                         <div class="item-info">
                             <div class="item-name">ต้มยำกุ้ง</div>
                             <div class="item-price">80 บาท</div>
@@ -50,6 +60,7 @@
                         <button class="add-btn" onclick="addToOrder(4)">เพิ่ม</button>
                     </div>
                     <div class="menu-item" data-id="5" data-name="ส้มตำ" data-price="35">
+                        <img src="images/products/som-tam.svg" alt="ส้มตำ" class="product-image">
                         <div class="item-info">
                             <div class="item-name">ส้มตำ</div>
                             <div class="item-price">35 บาท</div>
@@ -61,6 +72,7 @@
                 <div class="category">
                     <h3>🍜 ก้วยเตี๋ยว</h3>
                     <div class="menu-item" data-id="6" data-name="ก้วยเตี๋ยวน้ำ" data-price="40">
+                        <img src="images/products/noodle-soup.svg" alt="ก้วยเตี๋ยวน้ำ" class="product-image">
                         <div class="item-info">
                             <div class="item-name">ก้วยเตี๋ยวน้ำ</div>
                             <div class="item-price">40 บาท</div>
@@ -68,6 +80,7 @@
                         <button class="add-btn" onclick="addToOrder(6)">เพิ่ม</button>
                     </div>
                     <div class="menu-item" data-id="7" data-name="ก้วยเตี๋ยวต้มยำ" data-price="45">
+                        <img src="images/products/tom-yum-noodle.svg" alt="ก้วยเตี๋ยวต้มยำ" class="product-image">
                         <div class="item-info">
                             <div class="item-name">ก้วยเตี๋ยวต้มยำ</div>
                             <div class="item-price">45 บาท</div>
@@ -79,6 +92,7 @@
                 <div class="category">
                     <h3>🥤 เครื่องดื่ม</h3>
                     <div class="menu-item" data-id="8" data-name="น้ำเปล่า" data-price="10">
+                        <img src="images/products/water.svg" alt="น้ำเปล่า" class="product-image">
                         <div class="item-info">
                             <div class="item-name">น้ำเปล่า</div>
                             <div class="item-price">10 บาท</div>
@@ -86,6 +100,7 @@
                         <button class="add-btn" onclick="addToOrder(8)">เพิ่ม</button>
                     </div>
                     <div class="menu-item" data-id="9" data-name="ชาเย็น" data-price="20">
+                        <img src="images/products/thai-tea.svg" alt="ชาเย็น" class="product-image">
                         <div class="item-info">
                             <div class="item-name">ชาเย็น</div>
                             <div class="item-price">20 บาท</div>
@@ -93,6 +108,7 @@
                         <button class="add-btn" onclick="addToOrder(9)">เพิ่ม</button>
                     </div>
                     <div class="menu-item" data-id="10" data-name="น้ำมะนาว" data-price="25">
+                        <img src="images/products/lime-juice.svg" alt="น้ำมะนาว" class="product-image">
                         <div class="item-info">
                             <div class="item-name">น้ำมะนาว</div>
                             <div class="item-price">25 บาท</div>
