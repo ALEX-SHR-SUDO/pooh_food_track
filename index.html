@@ -3,119 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ร้านอาหารไทยพื้นบ้าน - ระบบติดตามอาหาร</title>
-    <meta name="description" content="ระบบสั่งอาหารออนไลน์สำหรับร้านอาหารไทยพื้นบ้าน - Thai traditional food ordering system">
-    <meta name="keywords" content="ร้านอาหารไทย, Thai food, อาหารไทย, สั่งอาหาร, food tracking">
+    <title>POOH - ระบบติดตามอาหาร</title>
+    <meta name="description" content="ระบบสั่งอาหารออนไลน์ POOH - POOH food ordering system">
+    <meta name="keywords" content="POOH, food, อาหาร, สั่งอาหาร, food tracking">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <img src="head.jpg" alt="ร้านอาหารไทยพื้นบ้าน" class="header-image">
-            <div class="header-content">
-                <h1>🍜 ร้านอาหารไทยพื้นบ้าน</h1>
-                <p>ระบบติดตามและสั่งอาหารออนไลน์</p>
-                <div class="header-decoration">
-                    <span class="decoration-line"></span>
-                    <span class="decoration-symbol">✦</span>
-                    <span class="decoration-line"></span>
-                </div>
-            </div>
+            <img src="header.jpg" alt="POOH" class="header-image">
+            <nav class="nav-menu">
+                <a href="#new" class="nav-item">เนื้อหมูสดใหม่</a>
+                <a href="#sausage" class="nav-item">ลูกชิน-ไส้กรอก</a>
+                <a href="#pork" class="nav-item">หนังชิงช้าง</a>
+                <a href="#beef" class="nav-item">คอโงกกา</a>
+                <a href="#other" class="nav-item">ค้านนากา</a>
+                <a href="#order" class="nav-item order-btn">สั่งซื้อเร็ว!</a>
+            </nav>
         </header>
 
         <div class="main-content">
             <div class="menu-section">
                 <h2>📋 เมนูอาหาร</h2>
                 
-                <div class="category">
-                    <h3>🍲 อาหารจานหลัก</h3>
-                    <div class="menu-item" data-id="1" data-name="ผัดไทย" data-price="45">
-                        <img src="images/products/pad-thai.svg" alt="ผัดไทย" class="product-image">
-                        <div class="item-info">
-                            <div class="item-name">ผัดไทย</div>
-                            <div class="item-price">45 บาท</div>
+                <div class="category" id="new">
+                    <h3>เนื้อหมูสดใหม่</h3>
+                    <div class="product-grid">
+                        <div class="product-card" data-id="1" data-name="เนื้อหมูกระสำชาด" data-price="180">
+                            <img src="images/products/pad-thai.svg" alt="เนื้อหมูกระสำชาด" class="product-image">
+                            <div class="product-info">
+                                <div class="product-name">เนื้อหมูกระสำชาด</div>
+                                <div class="product-price">฿ 180.-</div>
+                            </div>
+                            <button class="add-btn" onclick="addToOrder(1)">
+                                <span class="leaf-icon">🌿</span>
+                            </button>
                         </div>
-                        <button class="add-btn" onclick="addToOrder(1)">เพิ่ม</button>
-                    </div>
-                    <div class="menu-item" data-id="2" data-name="ผัดกะเพรา" data-price="50">
-                        <img src="images/products/pad-krapow.svg" alt="ผัดกะเพรา" class="product-image">
-                        <div class="item-info">
-                            <div class="item-name">ผัดกะเพรา</div>
-                            <div class="item-price">50 บาท</div>
+                        <div class="product-card" data-id="2" data-name="หมูสามชั้นสเต็ก" data-price="75">
+                            <img src="images/products/pad-krapow.svg" alt="หมูสามชั้นสเต็ก" class="product-image">
+                            <div class="product-info">
+                                <div class="product-name">หมูสามชั้นสเต็ก</div>
+                                <div class="product-price">฿ 75.-</div>
+                            </div>
+                            <button class="add-btn" onclick="addToOrder(2)">
+                                <span class="leaf-icon">🌿</span>
+                            </button>
                         </div>
-                        <button class="add-btn" onclick="addToOrder(2)">เพิ่ม</button>
-                    </div>
-                    <div class="menu-item" data-id="3" data-name="ข้าวผัด" data-price="40">
-                        <img src="images/products/fried-rice.svg" alt="ข้าวผัด" class="product-image">
-                        <div class="item-info">
-                            <div class="item-name">ข้าวผัด</div>
-                            <div class="item-price">40 บาท</div>
+                        <div class="product-card" data-id="3" data-name="เนื้อสำเน่า" data-price="75">
+                            <img src="images/products/fried-rice.svg" alt="เนื้อสำเน่า" class="product-image">
+                            <div class="product-info">
+                                <div class="product-name">เนื้อสำเน่า</div>
+                                <div class="product-price">฿ 75.-</div>
+                            </div>
+                            <button class="add-btn" onclick="addToOrder(3)">
+                                <span class="leaf-icon">🌿</span>
+                            </button>
                         </div>
-                        <button class="add-btn" onclick="addToOrder(3)">เพิ่ม</button>
-                    </div>
-                    <div class="menu-item" data-id="4" data-name="ต้มยำกุ้ง" data-price="80">
-                        <img src="images/products/tom-yum.svg" alt="ต้มยำกุ้ง" class="product-image">
-                        <div class="item-info">
-                            <div class="item-name">ต้มยำกุ้ง</div>
-                            <div class="item-price">80 บาท</div>
-                        </div>
-                        <button class="add-btn" onclick="addToOrder(4)">เพิ่ม</button>
-                    </div>
-                    <div class="menu-item" data-id="5" data-name="ส้มตำ" data-price="35">
-                        <img src="images/products/som-tam.svg" alt="ส้มตำ" class="product-image">
-                        <div class="item-info">
-                            <div class="item-name">ส้มตำ</div>
-                            <div class="item-price">35 บาท</div>
-                        </div>
-                        <button class="add-btn" onclick="addToOrder(5)">เพิ่ม</button>
                     </div>
                 </div>
 
-                <div class="category">
-                    <h3>🍜 ก้วยเตี๋ยว</h3>
-                    <div class="menu-item" data-id="6" data-name="ก้วยเตี๋ยวน้ำ" data-price="40">
-                        <img src="images/products/noodle-soup.svg" alt="ก้วยเตี๋ยวน้ำ" class="product-image">
-                        <div class="item-info">
-                            <div class="item-name">ก้วยเตี๋ยวน้ำ</div>
-                            <div class="item-price">40 บาท</div>
+                <div class="category" id="sausage">
+                    <h3>ลูกชิน และ ไส้กรอก</h3>
+                    <div class="product-grid">
+                        <div class="product-card" data-id="4" data-name="ลูกชิน หมูมหาไทร" data-price="111">
+                            <img src="images/products/tom-yum.svg" alt="ลูกชิน หมูมหาไทร" class="product-image">
+                            <div class="product-info">
+                                <div class="product-name">ลูกชิน หมูมหาไทร</div>
+                                <div class="product-price">฿ 111.-</div>
+                            </div>
+                            <button class="add-btn" onclick="addToOrder(4)">
+                                <span class="leaf-icon">🌿</span>
+                            </button>
                         </div>
-                        <button class="add-btn" onclick="addToOrder(6)">เพิ่ม</button>
-                    </div>
-                    <div class="menu-item" data-id="7" data-name="ก้วยเตี๋ยวต้มยำ" data-price="45">
-                        <img src="images/products/tom-yum-noodle.svg" alt="ก้วยเตี๋ยวต้มยำ" class="product-image">
-                        <div class="item-info">
-                            <div class="item-name">ก้วยเตี๋ยวต้มยำ</div>
-                            <div class="item-price">45 บาท</div>
+                        <div class="product-card" data-id="5" data-name="ลูกชิน หมูมหาไทร" data-price="95">
+                            <img src="images/products/som-tam.svg" alt="ลูกชิน หมูมหาไทร" class="product-image">
+                            <div class="product-info">
+                                <div class="product-name">ลูกชิน หมูมหาไทร</div>
+                                <div class="product-price">฿ 95.-</div>
+                            </div>
+                            <button class="add-btn" onclick="addToOrder(5)">
+                                <span class="leaf-icon">🌿</span>
+                            </button>
                         </div>
-                        <button class="add-btn" onclick="addToOrder(7)">เพิ่ม</button>
-                    </div>
-                </div>
-
-                <div class="category">
-                    <h3>🥤 เครื่องดื่ม</h3>
-                    <div class="menu-item" data-id="8" data-name="น้ำเปล่า" data-price="10">
-                        <img src="images/products/water.svg" alt="น้ำเปล่า" class="product-image">
-                        <div class="item-info">
-                            <div class="item-name">น้ำเปล่า</div>
-                            <div class="item-price">10 บาท</div>
+                        <div class="product-card" data-id="6" data-name="แกนตะเปลืองสีกะอา" data-price="85">
+                            <img src="images/products/noodle-soup.svg" alt="แกนตะเปลืองสีกะอา" class="product-image">
+                            <div class="product-info">
+                                <div class="product-name">แกนตะเปลืองสีกะอา</div>
+                                <div class="product-price">฿ 85.-</div>
+                            </div>
+                            <button class="add-btn" onclick="addToOrder(6)">
+                                <span class="leaf-icon">🌿</span>
+                            </button>
                         </div>
-                        <button class="add-btn" onclick="addToOrder(8)">เพิ่ม</button>
-                    </div>
-                    <div class="menu-item" data-id="9" data-name="ชาเย็น" data-price="20">
-                        <img src="images/products/thai-tea.svg" alt="ชาเย็น" class="product-image">
-                        <div class="item-info">
-                            <div class="item-name">ชาเย็น</div>
-                            <div class="item-price">20 บาท</div>
-                        </div>
-                        <button class="add-btn" onclick="addToOrder(9)">เพิ่ม</button>
-                    </div>
-                    <div class="menu-item" data-id="10" data-name="น้ำมะนาว" data-price="25">
-                        <img src="images/products/lime-juice.svg" alt="น้ำมะนาว" class="product-image">
-                        <div class="item-info">
-                            <div class="item-name">น้ำมะนาว</div>
-                            <div class="item-price">25 บาท</div>
-                        </div>
-                        <button class="add-btn" onclick="addToOrder(10)">เพิ่ม</button>
                     </div>
                 </div>
             </div>
