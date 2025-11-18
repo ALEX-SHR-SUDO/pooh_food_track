@@ -10,8 +10,25 @@
 </head>
 <body>
     <div class="container">
+        <!-- Hero Section with Product Showcase -->
+        <div class="hero-section">
+            <div class="hero-products">
+                <div class="hero-product-card">
+                    <img src="images/products/fresh-pork-realistic.jpg" alt="เนื้อหมูสดใหม่" class="hero-product-image">
+                </div>
+                <div class="hero-product-card">
+                    <img src="images/products/pork-belly-realistic.jpg" alt="หมูสามชั้น" class="hero-product-image">
+                </div>
+                <div class="hero-product-card">
+                    <img src="images/products/pork-slices-realistic.jpg" alt="หมูหั่นสไลด์" class="hero-product-image">
+                </div>
+            </div>
+        </div>
+
         <header>
-            <img src="header.jpg" alt="POOH" class="header-image">
+            <div class="header-logo-section">
+                <img src="header.jpg" alt="POOH Logo" class="header-logo-image">
+            </div>
             <nav class="nav-menu">
                 <a href="#new" class="nav-item">เนื้อหมูสดใหม่</a>
                 <a href="#sausage" class="nav-item">ลูกชิน-ไส้กรอก</a>
@@ -30,7 +47,7 @@
                     <h3>เนื้อหมูสดใหม่</h3>
                     <div class="product-grid">
                         <div class="product-card" data-id="1" data-name="เนื้อหมูกระสำชาด" data-price="180">
-                            <img src="images/products/pad-thai.svg" alt="เนื้อหมูกระสำชาด" class="product-image">
+                            <img src="images/products/fresh-pork-realistic.jpg" alt="เนื้อหมูกระสำชาด" class="product-image">
                             <div class="product-info">
                                 <div class="product-name">เนื้อหมูกระสำชาด</div>
                                 <div class="product-price">฿ 180.-</div>
@@ -40,7 +57,7 @@
                             </button>
                         </div>
                         <div class="product-card" data-id="2" data-name="หมูสามชั้นสเต็ก" data-price="75">
-                            <img src="images/products/pad-krapow.svg" alt="หมูสามชั้นสเต็ก" class="product-image">
+                            <img src="images/products/pork-belly-realistic.jpg" alt="หมูสามชั้นสเต็ก" class="product-image">
                             <div class="product-info">
                                 <div class="product-name">หมูสามชั้นสเต็ก</div>
                                 <div class="product-price">฿ 75.-</div>
@@ -50,7 +67,7 @@
                             </button>
                         </div>
                         <div class="product-card" data-id="3" data-name="เนื้อสำเน่า" data-price="75">
-                            <img src="images/products/fried-rice.svg" alt="เนื้อสำเน่า" class="product-image">
+                            <img src="images/products/pork-slices-realistic.jpg" alt="เนื้อสำเน่า" class="product-image">
                             <div class="product-info">
                                 <div class="product-name">เนื้อสำเน่า</div>
                                 <div class="product-price">฿ 75.-</div>
@@ -66,7 +83,7 @@
                     <h3>ลูกชิน และ ไส้กรอก</h3>
                     <div class="product-grid">
                         <div class="product-card" data-id="4" data-name="ลูกชิน หมูมหาไทร" data-price="111">
-                            <img src="images/products/tom-yum.svg" alt="ลูกชิน หมูมหาไทร" class="product-image">
+                            <img src="images/products/meatballs-realistic.jpg" alt="ลูกชิน หมูมหาไทร" class="product-image">
                             <div class="product-info">
                                 <div class="product-name">ลูกชิน หมูมหาไทร</div>
                                 <div class="product-price">฿ 111.-</div>
@@ -76,7 +93,7 @@
                             </button>
                         </div>
                         <div class="product-card" data-id="5" data-name="ลูกชิน หมูมหาไทร" data-price="95">
-                            <img src="images/products/som-tam.svg" alt="ลูกชิน หมูมหาไทร" class="product-image">
+                            <img src="images/products/meatballs-realistic.jpg" alt="ลูกชิน หมูมหาไทร" class="product-image">
                             <div class="product-info">
                                 <div class="product-name">ลูกชิน หมูมหาไทร</div>
                                 <div class="product-price">฿ 95.-</div>
@@ -86,7 +103,7 @@
                             </button>
                         </div>
                         <div class="product-card" data-id="6" data-name="แกนตะเปลืองสีกะอา" data-price="85">
-                            <img src="images/products/noodle-soup.svg" alt="แกนตะเปลืองสีกะอา" class="product-image">
+                            <img src="images/products/sausages-realistic.jpg" alt="แกนตะเปลืองสีกะอา" class="product-image">
                             <div class="product-info">
                                 <div class="product-name">แกนตะเปลืองสีกะอา</div>
                                 <div class="product-price">฿ 85.-</div>
@@ -121,6 +138,71 @@
                 </div>
             </div>
         </div>
+
+        <!-- Information Cards Section -->
+        <div class="info-section">
+            <h2>📦 ข้อมูลร้านอาหาร</h2>
+            <div class="info-cards">
+                <div class="info-card">
+                    <div class="info-icon">📞</div>
+                    <div class="info-title">ติดต่อสอบถาม</div>
+                    <div class="info-text">เบอร์โทรศัพท์: 02-xxx-xxxx<br>Line: @pooh-shop</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">⏰</div>
+                    <div class="info-title">เวลาทำการ</div>
+                    <div class="info-text">จันทร์ - เสาร์<br>08:00 - 18:00 น.</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">🚚</div>
+                    <div class="info-title">บริการจัดส่ง</div>
+                    <div class="info-text">จัดส่งฟรี!<br>สั่งซื้อขั้นต่ำ 500 บาท</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Promotional Section -->
+        <div class="promo-section">
+            <div class="promo-banner">
+                <h3>🎉 โปรโมชั่นพิเศษ</h3>
+                <p>พิการณาร้านอาหารของเราเพื่อซื้อความสะดวกสบายและคุณภาพที่ดีที่สุด สินค้าสดใหม่ทุกวัน จากฟาร์มคัดสรรชั้นเลิศ</p>
+            </div>
+            <div class="promo-features">
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>เนื้อหมูคุณภาพจากฟาร์มมาตรฐาน</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>ตรวจสอบคุณภาพทุกขั้นตอน</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>บริการจัดส่งรวดเร็วทันใจ</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>เกี่ยวกับเรา</h4>
+                    <p>POOH - ร้านอาหารคุณภาพ ส่งตรงถึงบ้านคุณ<br>ด้วยสินค้าสดใหม่และคุณภาพดีที่สุด</p>
+                </div>
+                <div class="footer-section">
+                    <h4>ติดต่อเรา</h4>
+                    <p>📞 โทร: 02-xxx-xxxx<br>📧 อีเมล: contact@pooh-shop.com<br>📍 ที่อยู่: กรุงเทพมหานคร</p>
+                </div>
+                <div class="footer-section">
+                    <h4>เวลาทำการ</h4>
+                    <p>จันทร์ - ศุกร์: 08:00 - 18:00<br>เสาร์: 09:00 - 17:00<br>อาทิตย์: ปิดทำการ</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 POOH Food Shop. All rights reserved.</p>
+            </div>
+        </footer>
     </div>
 
     <script src="script.js"></script>
