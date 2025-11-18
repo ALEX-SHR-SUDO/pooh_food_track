@@ -23,18 +23,69 @@ body {
     position: relative;
 }
 
-header {
-    background: white;
-    position: relative;
-    overflow: hidden;
+/* Hero Section with Product Showcase */
+.hero-section {
+    background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+    padding: 30px 20px;
+    border-bottom: 3px solid #8B2635;
 }
 
-/* Header image styling */
-.header-image {
+.hero-products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.hero-product-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s;
+}
+
+.hero-product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.hero-product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .hero-products {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+header {
+    background: linear-gradient(135deg, #3a2618 0%, #5d4a3a 50%, #3a2618 100%);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Header logo section styling */
+.header-logo-section {
+    padding: 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #2a1810 0%, #4a3428 50%, #2a1810 100%);
+    border-bottom: 3px solid #DAA520;
+}
+
+.header-logo-image {
+    max-width: 600px;
     width: 100%;
     height: auto;
-    display: block;
-    object-fit: cover;
+    display: inline-block;
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.5));
 }
 
 /* Navigation menu */
@@ -412,4 +463,160 @@ h2 {
 .order-number {
     font-size: 1.5em;
     margin-top: 10px;
+}
+
+/* Information Cards Section */
+.info-section {
+    background: white;
+    padding: 40px 30px;
+    margin: 0;
+}
+
+.info-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.info-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.info-card {
+    background: linear-gradient(135deg, #fff 0%, #f9f9f9 100%);
+    padding: 30px 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid #e0e0e0;
+    transition: all 0.3s;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    border-color: #8B2635;
+}
+
+.info-icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+}
+
+.info-title {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.info-text {
+    color: #666;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .info-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Promotional Section */
+.promo-section {
+    background: linear-gradient(135deg, #8B2635 0%, #A0303E 100%);
+    color: white;
+    padding: 40px 30px;
+}
+
+.promo-banner {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.promo-banner h3 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.promo-banner p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.promo-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.feature-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.feature-icon {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #FFD700;
+}
+
+@media (max-width: 768px) {
+    .promo-features {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Footer Styles */
+.site-footer {
+    background: linear-gradient(135deg, #2a1810 0%, #3a2618 100%);
+    color: white;
+    padding: 40px 30px 20px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto 30px;
+}
+
+.footer-section h4 {
+    color: #DAA520;
+    font-size: 1.3em;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.footer-section p {
+    line-height: 1.8;
+    color: #ddd;
+}
+
+.footer-bottom {
+    border-top: 2px solid rgba(218, 165, 32, 0.3);
+    padding-top: 20px;
+    text-align: center;
+    color: #aaa;
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
 }
