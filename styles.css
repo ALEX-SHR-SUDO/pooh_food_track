@@ -32,17 +32,16 @@ header {
 
 /* Header logo section styling */
 .header-logo-section {
-    padding: 20px;
+    padding: 0;
     text-align: center;
     background: linear-gradient(135deg, #2a1810 0%, #4a3428 50%, #2a1810 100%);
     border-bottom: 3px solid #DAA520;
 }
 
 .header-logo-image {
-    max-width: 600px;
     width: 100%;
     height: auto;
-    display: inline-block;
+    display: block;
     filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.5));
 }
 
