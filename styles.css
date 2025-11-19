@@ -43,6 +43,10 @@ header {
     height: auto;
     display: block;
     filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.5));
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: high-quality;
+    -ms-interpolation-mode: bicubic;
 }
 
 /* Navigation menu */
