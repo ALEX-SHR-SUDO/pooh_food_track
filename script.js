@@ -45,7 +45,16 @@ const translations = {
         // Categories
         categoryNew: "เนื้อหมูสดใหม่",
         categorySausage: "ลูกชิน และ ไส้กรอก",
-        categoryOther: "ค้านนากา"
+        categoryOther: "ค้านนากา",
+        // Product names
+        product1: "เนื้อหมูกระสำชาด",
+        product2: "หมูสามชั้นสเต็ก",
+        product3: "เนื้อสำเน่า",
+        product4: "ลูกชิน หมูมหาไทร",
+        product5: "ลูกชิน หมูมหาไทร",
+        product6: "แกนตะเปลืองสีกะอา",
+        product11: "ค้านนากาหั่นบาง",
+        product12: "ค้านนากาพิเศษ"
     },
     ru: {
         title: "POOH - Система отслеживания еды",
@@ -87,7 +96,16 @@ const translations = {
         // Categories
         categoryNew: "Свежая свинина",
         categorySausage: "Фрикадельки и колбаски",
-        categoryOther: "Специальное"
+        categoryOther: "Специальное",
+        // Product names
+        product1: "Свинина Красамчад",
+        product2: "Стейк из свиной грудинки",
+        product3: "Свинина Самнао",
+        product4: "Фрикадельки Свиные Махатай",
+        product5: "Фрикадельки Свиные Махатай",
+        product6: "Колбаски Сикао",
+        product11: "Канака нарезанная тонко",
+        product12: "Канака специальная"
     }
 };
 
@@ -108,14 +126,12 @@ class FoodOrderSystem {
         const menuItem = document.querySelector(`[data-id="${itemId}"]`);
         if (!menuItem) return;
 
-        const name = menuItem.getAttribute('data-name');
         const price = parseFloat(menuItem.getAttribute('data-price'));
 
         if (this.order[itemId]) {
             this.order[itemId].quantity++;
         } else {
             this.order[itemId] = {
-                name: name,
                 price: price,
                 quantity: 1
             };
@@ -166,6 +182,15 @@ class FoodOrderSystem {
             const key = element.getAttribute('data-i18n');
             if (t[key]) {
                 element.textContent = t[key];
+            }
+        });
+        
+        // Update product card data-name attributes for translated order display
+        document.querySelectorAll('.product-card').forEach(card => {
+            const productId = card.getAttribute('data-id');
+            const productKey = `product${productId}`;
+            if (t[productKey]) {
+                card.setAttribute('data-name', t[productKey]);
             }
         });
         
@@ -241,11 +266,15 @@ class FoodOrderSystem {
                 const itemTotal = item.price * item.quantity;
                 total += itemTotal;
                 count += item.quantity;
+                
+                // Get translated product name
+                const productKey = `product${itemId}`;
+                const productName = t[productKey] || `Product ${itemId}`;
 
                 html += `
                     <div class="order-item">
                         <div class="order-item-info">
-                            <div class="order-item-name">${this.escapeHtml(item.name)}</div>
+                            <div class="order-item-name">${this.escapeHtml(productName)}</div>
                             <div class="order-item-price">${item.price} ${t.baht} × ${item.quantity} = ${itemTotal} ${t.baht}</div>
                         </div>
                         <div class="quantity-controls">
