@@ -40,11 +40,15 @@ const translations = {
         // Navigation
         navNew: "เนื้อหมูสดใหม่",
         navSausage: "แหนม",
+        navSaiGrog: "ไส้กรอก",
+        navLukChin: "ลูกชิ้น",
         navOther: "ค้านนากา",
         navOrder: "สั่งซื้อเร็ว!",
         // Categories
         categoryNew: "เนื้อหมูสดใหม่",
         categorySausage: "แหนม",
+        categorySaiGrog: "ไส้กรอก",
+        categoryLukChin: "ลูกชิ้น",
         categoryOther: "ค้านนากา",
         // Product names
         product1: "เนื้อหมูกระสำชาด",
@@ -53,6 +57,10 @@ const translations = {
         product4: "ลูกชิน หมูมหาไทร",
         product5: "ลูกชิน หมูมหาไทร",
         product6: "แกนตะเปลืองสีกะอา",
+        product7: "1 - po zene 10 bath",
+        product8: "2 - po zene 20 bath",
+        product9: "1 - po zene 10 bath",
+        product10: "2 - po zene 20 bath",
         product11: "ค้านนากาหั่นบาง",
         product12: "ค้านนากาพิเศษ"
     },
@@ -91,11 +99,15 @@ const translations = {
         // Navigation
         navNew: "Свежая свинина",
         navSausage: "нэм",
+        navSaiGrog: "Сосиски",
+        navLukChin: "Фрикадельки",
         navOther: "Специальное",
         navOrder: "Быстрый заказ!",
         // Categories
         categoryNew: "Свежая свинина",
         categorySausage: "нэм",
+        categorySaiGrog: "Сосиски",
+        categoryLukChin: "Фрикадельки",
         categoryOther: "Специальное",
         // Product names
         product1: "Свинина Красамчад",
@@ -104,6 +116,10 @@ const translations = {
         product4: "Фрикадельки Свиные Махатай",
         product5: "Фрикадельки Свиные Махатай",
         product6: "Колбаски Сикао",
+        product7: "1 - по цене 10 бат",
+        product8: "2 - по цене 20 бат",
+        product9: "1 - по цене 10 бат",
+        product10: "2 - по цене 20 бат",
         product11: "Канака нарезанная тонко",
         product12: "Канака специальная"
     }
