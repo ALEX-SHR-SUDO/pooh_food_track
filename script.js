@@ -39,7 +39,7 @@ const translations = {
         copyright: "&copy; 2024 POOH Food Shop. All rights reserved.",
         // Navigation
         navNew: "เนื้อหมูสดใหม่",
-        navSausage: "ลูกชิน-ไส้กรอก",
+        navSausage: "แหนม",
         navOther: "ค้านนากา",
         navOrder: "สั่งซื้อเร็ว!",
         // Categories
