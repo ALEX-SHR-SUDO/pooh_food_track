@@ -12,10 +12,18 @@
 - 💰 คำนวณราคารวมอัตโนมัติ
 - ✅ ยืนยันคำสั่งซื้อและได้รับหมายเลขคำสั่งซื้อ
 - 📱 รองรับการใช้งานบนมือถือ (Responsive Design)
-- 🇹🇭 ภาษาไทยทั้งหมด
+- 🌐 **รองรับหลายภาษา - ไทย และ รัสเซีย (Thai & Russian)**
+- 🔐 **Admin Panel - ระบบจัดการสินค้าแบบครบวงจร**
+  - เพิ่มสินค้าใหม่ (ชื่อสินค้า, ราคา, หมวดหมู่, รูปภาพ)
+  - แก้ไขข้อมูลสินค้า
+  - ลบสินค้า
+  - กรองสินค้าตามหมวดหมู่
+  - ระบบ Authentication ด้วยรหัสผ่าน
+  - รองรับสองภาษา (ไทย/รัสเซีย)
 - 🎨 **ธีมสีธงชาติไทย - แดง ขาว น้ำเงิน และทองคำ**
 - 🏛️ **การออกแบบแบบมืออาชีพด้วยองค์ประกอบวัฒนธรรมไทย**
 - ✨ **เอฟเฟกต์การโต้ตอบที่ลื่นไหลและทันสมัย**
+- 💾 **จัดเก็บข้อมูลด้วย localStorage - ไม่ต้องการ Backend**
 
 ## เมนูอาหาร
 
@@ -37,12 +45,25 @@
 
 ## วิธีการใช้งาน
 
+### สำหรับลูกค้า (Customer)
 1. เปิดไฟล์ `index.html` ในเว็บเบราว์เซอร์
-2. เลือกเมนูอาหารที่ต้องการโดยกดปุ่ม "เพิ่ม"
-3. ปรับจำนวนอาหารในตะกร้าด้วยปุ่ม + และ -
-4. ตรวจสอบยอดรวมทั้งหมด
-5. กดปุ่ม "ยืนยันคำสั่งซื้อ" เพื่อทำการสั่งอาหาร
-6. รับหมายเลขคำสั่งซื้อและรอรับอาหาร
+2. เลือกภาษาที่ต้องการ (ไทย/รัสเซีย) จากปุ่มด้านบน
+3. เลือกเมนูอาหารที่ต้องการโดยกดปุ่ม "🌿"
+4. ปรับจำนวนอาหารในตะกร้าด้วยปุ่ม + และ -
+5. ตรวจสอบยอดรวมทั้งหมด
+6. กดปุ่ม "ยืนยันคำสั่งซื้อ" เพื่อทำการสั่งอาหาร
+7. รับหมายเลขคำสั่งซื้อและรอรับอาหาร
+
+### สำหรับผู้ดูแลระบบ (Admin)
+1. คลิกลิงก์ "🔐 Admin" ที่ด้านล่างของหน้าเว็บ หรือเข้าผ่าน `admin.html`
+2. ใส่รหัสผ่าน (ค่าเริ่มต้น: `admin123`)
+3. จัดการสินค้า:
+   - **เพิ่มสินค้าใหม่**: กรอกชื่อสินค้า (ไทย/รัสเซีย), ราคา, หมวดหมู่, และ URL รูปภาพ (ถ้ามี)
+   - **แก้ไขสินค้า**: คลิกปุ่ม "✏️ แก้ไข" บนการ์ดสินค้า
+   - **ลบสินค้า**: คลิกปุ่ม "🗑️ ลบ" บนการ์ดสินค้า
+   - **กรองสินค้า**: เลือกหมวดหมู่จาก dropdown เพื่อดูสินค้าในหมวดหมู่นั้น
+4. เปลี่ยนภาษาได้ตลอดเวลาด้วยปุ่มด้านบน
+5. คลิก "ออกจากระบบ" เพื่อออกจากระบบ
 
 ## 🚀 เทคโนโลยีที่ใช้
 - HTML5 (Semantic markup with SEO optimization)
@@ -55,9 +76,15 @@
 ## 📁 โครงสร้างโปรเจค
 ```
 pooh_food_track/
-├── index.html          # Main HTML file
+├── index.html          # Main HTML file - หน้าหลักสำหรับลูกค้า
+├── admin.html          # Admin panel HTML - หน้าจัดการสินค้า
 ├── styles.css          # Professional CSS with Thai theme
-├── script.js           # JavaScript with OOP structure
+├── admin.css           # Admin panel specific styles
+├── script.js           # JavaScript with OOP structure - ระบบหลัก
+├── admin.js            # Admin panel JavaScript - ระบบจัดการ
+├── image/              # Image directory
+│   ├── meat1.png       # Header image
+│   └── ...
 ├── vercel.json         # Vercel deployment configuration
 ├── README.md           # Project documentation
 └── DEPLOYMENT.md       # Vercel deployment guide
@@ -72,6 +99,45 @@ pooh_food_track/
 - **Multi-color Borders**: Gradient borders combining Red, Blue, and Gold
 - **Modern Thai Design**: Professional styling with traditional Thai cultural elements
 - **Interactive Effects**: Smooth color transitions and hover effects
+
+## 🔐 Admin Panel Features
+
+The admin panel (`admin.html`) provides a complete product management system:
+
+### Authentication
+- Password-protected access (default: `admin123`)
+- Session-based authentication
+- Automatic logout on page close
+
+### Product Management
+- **Add Products**: Create new products with Thai and Russian names
+- **Edit Products**: Modify product details including:
+  - Name in both languages (Thai/Russian)
+  - Price (in Baht)
+  - Category selection
+  - Image URL (optional)
+- **Delete Products**: Remove products with confirmation dialog
+- **Filter Products**: View products by category or see all
+
+### User Interface
+- Bilingual support (Thai/Russian) - switch anytime
+- Responsive design - works on all devices
+- Real-time updates - changes appear immediately
+- Clean and intuitive interface
+- Category badges with color coding
+- Product ID tracking
+
+### Data Storage
+- **LocalStorage-based**: No backend required
+- Persistent data across sessions
+- Automatic initialization with default products
+- Dynamic product loading on main page
+
+### Access
+- Link available in the footer of main page: "🔐 Admin"
+- Direct access via `admin.html`
+
+**Security Note**: In a production environment, the password should be properly secured and authentication should be implemented server-side.
 
 ## 💻 การติดตั้งและใช้งาน
 
