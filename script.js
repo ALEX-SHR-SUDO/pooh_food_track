@@ -3,15 +3,113 @@
  * Professional JavaScript implementation
  */
 
+// Translation data
+const translations = {
+    th: {
+        title: "POOH - ระบบติดตามอาหาร",
+        menu: "📋 เมนูอาหาร",
+        orderList: "🛒 รายการสั่งอาหาร",
+        emptyOrder: "ยังไม่มีรายการอาหาร<br>กรุณาเลือกเมนูที่ต้องการ",
+        itemCount: "จำนวนรายการ:",
+        totalPrice: "ยอดรวมทั้งหมด:",
+        confirmBtn: "ยืนยันคำสั่งซื้อ",
+        baht: "บาท",
+        removeBtn: "ลบ",
+        successMessage: "✅ ยืนยันคำสั่งซื้อสำเร็จ!",
+        orderNumber: "หมายเลขคำสั่งซื้อ:",
+        waitMessage: "กรุณารอสักครู่ อาหารจะเสิร์ฟในไม่ช้า",
+        infoTitle: "📦 ข้อมูลร้านอาหาร",
+        contactTitle: "ติดต่อสอบถาม",
+        contactText: "เบอร์โทรศัพท์: 02-xxx-xxxx<br>Line: @pooh-shop",
+        hoursTitle: "เวลาทำการ",
+        hoursText: "จันทร์ - เสาร์<br>08:00 - 18:00 น.",
+        deliveryTitle: "บริการจัดส่ง",
+        deliveryText: "จัดส่งฟรี!<br>สั่งซื้อขั้นต่ำ 500 บาท",
+        promoTitle: "🎉 โปรโมชั่นพิเศษ",
+        promoText: "พิจารณาร้านอาหารของเราเพื่อซื้อความสะดวกสบายและคุณภาพที่ดีที่สุด สินค้าสดใหม่ทุกวัน จากฟาร์มคัดสรรชั้นเลิศ",
+        feature1: "เนื้อหมูคุณภาพจากฟาร์มมาตรฐาน",
+        feature2: "ตรวจสอบคุณภาพทุกขั้นตอน",
+        feature3: "บริการจัดส่งรวดเร็วทันใจ",
+        aboutTitle: "เกี่ยวกับเรา",
+        aboutText: "POOH - ร้านอาหารคุณภาพ ส่งตรงถึงบ้านคุณ<br>ด้วยสินค้าสดใหม่และคุณภาพดีที่สุด",
+        contactUsTitle: "ติดต่อเรา",
+        contactUsText: "📞 โทร: 02-xxx-xxxx<br>📧 อีเมล: contact@pooh-shop.com<br>📍 ที่อยู่: กรุงเทพมหานคร",
+        workingHoursTitle: "เวลาทำการ",
+        workingHoursText: "จันทร์ - ศุกร์: 08:00 - 18:00<br>เสาร์: 09:00 - 17:00<br>อาทิตย์: ปิดทำการ",
+        copyright: "&copy; 2024 POOH Food Shop. All rights reserved.",
+        // Navigation
+        navNew: "เนื้อหมูสดใหม่",
+        navSausage: "ลูกชิน-ไส้กรอก",
+        navPork: "หนังชิงช้าง",
+        navBeef: "คอโงกกา",
+        navOther: "ค้านนากา",
+        navOrder: "สั่งซื้อเร็ว!",
+        // Categories
+        categoryNew: "เนื้อหมูสดใหม่",
+        categorySausage: "ลูกชิน และ ไส้กรอก",
+        categoryPork: "หนังชิงช้าง",
+        categoryBeef: "คอโงกกา",
+        categoryOther: "ค้านนากา"
+    },
+    ru: {
+        title: "POOH - Система отслеживания еды",
+        menu: "📋 Меню",
+        orderList: "🛒 Список заказов",
+        emptyOrder: "Заказов пока нет<br>Пожалуйста, выберите блюда",
+        itemCount: "Количество товаров:",
+        totalPrice: "Итого:",
+        confirmBtn: "Подтвердить заказ",
+        baht: "бат",
+        removeBtn: "Удалить",
+        successMessage: "✅ Заказ успешно подтвержден!",
+        orderNumber: "Номер заказа:",
+        waitMessage: "Пожалуйста, подождите, еда скоро будет подана",
+        infoTitle: "📦 Информация о ресторане",
+        contactTitle: "Связаться с нами",
+        contactText: "Телефон: 02-xxx-xxxx<br>Line: @pooh-shop",
+        hoursTitle: "Часы работы",
+        hoursText: "Понедельник - Суббота<br>08:00 - 18:00",
+        deliveryTitle: "Доставка",
+        deliveryText: "Бесплатная доставка!<br>Минимальный заказ 500 бат",
+        promoTitle: "🎉 Специальные предложения",
+        promoText: "Посетите наш ресторан для максимального удобства и качества. Свежие продукты каждый день, отборные с лучших ферм",
+        feature1: "Качественная свинина с сертифицированных ферм",
+        feature2: "Контроль качества на каждом этапе",
+        feature3: "Быстрая доставка",
+        aboutTitle: "О нас",
+        aboutText: "POOH - Качественный ресторан с доставкой на дом<br>Со свежими продуктами высочайшего качества",
+        contactUsTitle: "Свяжитесь с нами",
+        contactUsText: "📞 Тел: 02-xxx-xxxx<br>📧 Email: contact@pooh-shop.com<br>📍 Адрес: Бангкок",
+        workingHoursTitle: "Часы работы",
+        workingHoursText: "Пн - Пт: 08:00 - 18:00<br>Сб: 09:00 - 17:00<br>Вс: Закрыто",
+        copyright: "&copy; 2024 POOH Food Shop. Все права защищены.",
+        // Navigation
+        navNew: "Свежая свинина",
+        navSausage: "Фрикадельки-Колбаски",
+        navPork: "Свиная кожа",
+        navBeef: "Говяжья шея",
+        navOther: "Специальное",
+        navOrder: "Быстрый заказ!",
+        // Categories
+        categoryNew: "Свежая свинина",
+        categorySausage: "Фрикадельки и колбаски",
+        categoryPork: "Свиная кожа",
+        categoryBeef: "Говяжья шея",
+        categoryOther: "Специальное"
+    }
+};
+
 class FoodOrderSystem {
     constructor() {
         this.order = {};
         this.orderCounter = 1;
+        this.currentLang = localStorage.getItem('language') || 'th';
         this.init();
     }
 
     init() {
         this.updateOrderDisplay();
+        this.applyTranslations();
     }
 
     addToOrder(itemId) {
@@ -49,7 +147,87 @@ class FoodOrderSystem {
         }
     }
 
+    switchLanguage(lang) {
+        this.currentLang = lang;
+        localStorage.setItem('language', lang);
+        this.applyTranslations();
+        this.updateOrderDisplay();
+        
+        // Update language switcher buttons
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        const targetBtn = document.querySelector(`[data-lang="${lang}"]`);
+        if (targetBtn) {
+            targetBtn.classList.add('active');
+        }
+    }
+
+    applyTranslations() {
+        const t = translations[this.currentLang];
+        
+        // Update page title
+        document.title = t.title;
+        
+        // Update all elements with data-i18n attributes
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            if (t[key]) {
+                element.textContent = t[key];
+            }
+        });
+        
+        // Update info section
+        const infoTitle = document.querySelector('.info-section h2');
+        if (infoTitle) infoTitle.textContent = t.infoTitle;
+        
+        const infoCards = document.querySelectorAll('.info-card');
+        if (infoCards[0]) {
+            infoCards[0].querySelector('.info-title').textContent = t.contactTitle;
+            infoCards[0].querySelector('.info-text').innerHTML = t.contactText;
+        }
+        if (infoCards[1]) {
+            infoCards[1].querySelector('.info-title').textContent = t.hoursTitle;
+            infoCards[1].querySelector('.info-text').innerHTML = t.hoursText;
+        }
+        if (infoCards[2]) {
+            infoCards[2].querySelector('.info-title').textContent = t.deliveryTitle;
+            infoCards[2].querySelector('.info-text').innerHTML = t.deliveryText;
+        }
+        
+        // Update promo section
+        const promoTitle = document.querySelector('.promo-banner h3');
+        if (promoTitle) promoTitle.textContent = t.promoTitle;
+        
+        const promoText = document.querySelector('.promo-banner p');
+        if (promoText) promoText.textContent = t.promoText;
+        
+        const features = document.querySelectorAll('.feature-item span:last-child');
+        if (features[0]) features[0].textContent = t.feature1;
+        if (features[1]) features[1].textContent = t.feature2;
+        if (features[2]) features[2].textContent = t.feature3;
+        
+        // Update footer
+        const footerSections = document.querySelectorAll('.footer-section');
+        if (footerSections[0]) {
+            footerSections[0].querySelector('h4').textContent = t.aboutTitle;
+            footerSections[0].querySelector('p').innerHTML = t.aboutText;
+        }
+        if (footerSections[1]) {
+            footerSections[1].querySelector('h4').textContent = t.contactUsTitle;
+            footerSections[1].querySelector('p').innerHTML = t.contactUsText;
+        }
+        if (footerSections[2]) {
+            footerSections[2].querySelector('h4').textContent = t.workingHoursTitle;
+            footerSections[2].querySelector('p').innerHTML = t.workingHoursText;
+        }
+        
+        const footerBottom = document.querySelector('.footer-bottom p');
+        if (footerBottom) footerBottom.innerHTML = t.copyright;
+    }
+
     updateOrderDisplay() {
+        const t = translations[this.currentLang];
         const orderList = document.getElementById('orderList');
         const itemCount = document.getElementById('itemCount');
         const totalPrice = document.getElementById('totalPrice');
@@ -58,7 +236,7 @@ class FoodOrderSystem {
         if (Object.keys(this.order).length === 0) {
             orderList.innerHTML = `
                 <div class="empty-order">
-                    ยังไม่มีรายการอาหาร<br>กรุณาเลือกเมนูที่ต้องการ
+                    ${t.emptyOrder}
                 </div>
             `;
             confirmBtn.disabled = true;
@@ -76,13 +254,13 @@ class FoodOrderSystem {
                     <div class="order-item">
                         <div class="order-item-info">
                             <div class="order-item-name">${this.escapeHtml(item.name)}</div>
-                            <div class="order-item-price">${item.price} บาท × ${item.quantity} = ${itemTotal} บาท</div>
+                            <div class="order-item-price">${item.price} ${t.baht} × ${item.quantity} = ${itemTotal} ${t.baht}</div>
                         </div>
                         <div class="quantity-controls">
                             <button class="qty-btn" onclick="orderSystem.updateQuantity(${itemId}, -1)">−</button>
                             <span class="quantity">${item.quantity}</span>
                             <button class="qty-btn" onclick="orderSystem.updateQuantity(${itemId}, 1)">+</button>
-                            <button class="remove-btn" onclick="orderSystem.removeFromOrder(${itemId})">ลบ</button>
+                            <button class="remove-btn" onclick="orderSystem.removeFromOrder(${itemId})">${t.removeBtn}</button>
                         </div>
                     </div>
                 `;
@@ -90,7 +268,7 @@ class FoodOrderSystem {
 
             orderList.innerHTML = html;
             itemCount.textContent = count;
-            totalPrice.textContent = `${total} บาท`;
+            totalPrice.textContent = `${total} ${t.baht}`;
             confirmBtn.disabled = false;
         }
     }
@@ -98,7 +276,8 @@ class FoodOrderSystem {
     confirmOrder() {
         if (Object.keys(this.order).length === 0) return;
 
-        const orderNumber = `TH${String(this.orderCounter).padStart(4, '0')}`;
+        const t = translations[this.currentLang];
+        const orderNumber = `${this.currentLang.toUpperCase()}${String(this.orderCounter).padStart(4, '0')}`;
         this.orderCounter++;
 
         const orderList = document.getElementById('orderList');
@@ -109,20 +288,20 @@ class FoodOrderSystem {
 
         orderList.innerHTML = `
             <div class="success-message">
-                ✅ ยืนยันคำสั่งซื้อสำเร็จ!
-                <div class="order-number">หมายเลขคำสั่งซื้อ: ${orderNumber}</div>
+                ${t.successMessage}
+                <div class="order-number">${t.orderNumber} ${orderNumber}</div>
                 <div style="margin-top: 10px; font-size: 0.9em;">
-                    ยอดรวม: ${total} บาท
+                    ${t.totalPrice} ${total} ${t.baht}
                 </div>
                 <div style="margin-top: 10px; font-size: 0.9em;">
-                    กรุณารอสักครู่ อาหารจะเสิร์ฟในไม่ช้า
+                    ${t.waitMessage}
                 </div>
             </div>
         `;
 
         this.order = {};
         document.getElementById('itemCount').textContent = '0';
-        document.getElementById('totalPrice').textContent = '0 บาท';
+        document.getElementById('totalPrice').textContent = `0 ${t.baht}`;
         document.getElementById('confirmBtn').disabled = true;
 
         setTimeout(() => {
