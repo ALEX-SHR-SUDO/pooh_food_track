@@ -44,6 +44,7 @@ const translations = {
         navLukChin: "ลูกชิ้น",
         navOther: "ค้านนากา",
         navOrder: "สั่งซื้อเร็ว!",
+        navAdmin: "🔐 Admin",
         // Categories
         categoryNew: "เนื้อหมูสดใหม่",
         categorySausage: "แหนม",
@@ -103,6 +104,7 @@ const translations = {
         navLukChin: "Фрикадельки",
         navOther: "Специальное",
         navOrder: "Быстрый заказ!",
+        navAdmin: "🔐 Админка",
         // Categories
         categoryNew: "Свежая свинина",
         categorySausage: "нэм",
