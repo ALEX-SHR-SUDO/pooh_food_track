@@ -40,14 +40,12 @@ const translations = {
         // Navigation
         navNew: "เนื้อหมูสดใหม่",
         navSausage: "ลูกชิน-ไส้กรอก",
-        navPork: "หนังชิงช้าง",
         navBeef: "คอโงกกา",
         navOther: "ค้านนากา",
         navOrder: "สั่งซื้อเร็ว!",
         // Categories
         categoryNew: "เนื้อหมูสดใหม่",
         categorySausage: "ลูกชิน และ ไส้กรอก",
-        categoryPork: "หนังชิงช้าง",
         categoryBeef: "คอโงกกา",
         categoryOther: "ค้านนากา"
     },
@@ -86,14 +84,12 @@ const translations = {
         // Navigation
         navNew: "Свежая свинина",
         navSausage: "Фрикадельки-Колбаски",
-        navPork: "Свиная кожа",
         navBeef: "Говяжья шея",
         navOther: "Специальное",
         navOrder: "Быстрый заказ!",
         // Categories
         categoryNew: "Свежая свинина",
         categorySausage: "Фрикадельки и колбаски",
-        categoryPork: "Свиная кожа",
         categoryBeef: "Говяжья шея",
         categoryOther: "Специальное"
     }
