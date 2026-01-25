@@ -157,7 +157,10 @@ class FoodOrderSystem {
         document.querySelectorAll('.lang-btn').forEach(btn => {
             btn.classList.remove('active');
         });
-        document.querySelector(`[data-lang="${lang}"]`).classList.add('active');
+        const targetBtn = document.querySelector(`[data-lang="${lang}"]`);
+        if (targetBtn) {
+            targetBtn.classList.add('active');
+        }
     }
 
     applyTranslations() {
@@ -166,38 +169,13 @@ class FoodOrderSystem {
         // Update page title
         document.title = t.title;
         
-        // Update navigation
-        const navItems = document.querySelectorAll('.nav-item');
-        if (navItems[0]) navItems[0].textContent = t.navNew;
-        if (navItems[1]) navItems[1].textContent = t.navSausage;
-        if (navItems[2]) navItems[2].textContent = t.navPork;
-        if (navItems[3]) navItems[3].textContent = t.navBeef;
-        if (navItems[4]) navItems[4].textContent = t.navOther;
-        if (navItems[5]) navItems[5].textContent = t.navOrder;
-        
-        // Update main sections
-        const menuSection = document.querySelector('.menu-section h2');
-        if (menuSection) menuSection.textContent = t.menu;
-        
-        const orderSection = document.querySelector('.order-section h2');
-        if (orderSection) orderSection.textContent = t.orderList;
-        
-        // Update category titles
-        const categories = document.querySelectorAll('.category h3');
-        if (categories[0]) categories[0].textContent = t.categoryNew;
-        if (categories[1]) categories[1].textContent = t.categorySausage;
-        if (categories[2]) categories[2].textContent = t.categoryPork;
-        if (categories[3]) categories[3].textContent = t.categoryBeef;
-        if (categories[4]) categories[4].textContent = t.categoryOther;
-        
-        // Update order summary labels
-        const summaryRows = document.querySelectorAll('.summary-row span:first-child');
-        if (summaryRows[0]) summaryRows[0].textContent = t.itemCount;
-        if (summaryRows[1]) summaryRows[1].textContent = t.totalPrice;
-        
-        // Update confirm button
-        const confirmBtn = document.getElementById('confirmBtn');
-        if (confirmBtn) confirmBtn.textContent = t.confirmBtn;
+        // Update all elements with data-i18n attributes
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            if (t[key]) {
+                element.textContent = t[key];
+            }
+        });
         
         // Update info section
         const infoTitle = document.querySelector('.info-section h2');
@@ -299,7 +277,7 @@ class FoodOrderSystem {
         if (Object.keys(this.order).length === 0) return;
 
         const t = translations[this.currentLang];
-        const orderNumber = `TH${String(this.orderCounter).padStart(4, '0')}`;
+        const orderNumber = `${this.currentLang.toUpperCase()}${String(this.orderCounter).padStart(4, '0')}`;
         this.orderCounter++;
 
         const orderList = document.getElementById('orderList');

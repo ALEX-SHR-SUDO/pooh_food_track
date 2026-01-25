@@ -19,21 +19,21 @@
                 </div>
             </div>
             <nav class="nav-menu">
-                <a href="#new" class="nav-item">เนื้อหมูสดใหม่</a>
-                <a href="#sausage" class="nav-item">ลูกชิน-ไส้กรอก</a>
-                <a href="#pork" class="nav-item">หนังชิงช้าง</a>
-                <a href="#beef" class="nav-item">คอโงกกา</a>
-                <a href="#other" class="nav-item">ค้านนากา</a>
-                <a href="#order" class="nav-item order-btn">สั่งซื้อเร็ว!</a>
+                <a href="#new" class="nav-item" data-i18n="navNew">เนื้อหมูสดใหม่</a>
+                <a href="#sausage" class="nav-item" data-i18n="navSausage">ลูกชิน-ไส้กรอก</a>
+                <a href="#pork" class="nav-item" data-i18n="navPork">หนังชิงช้าง</a>
+                <a href="#beef" class="nav-item" data-i18n="navBeef">คอโงกกา</a>
+                <a href="#other" class="nav-item" data-i18n="navOther">ค้านนากา</a>
+                <a href="#order" class="nav-item order-btn" data-i18n="navOrder">สั่งซื้อเร็ว!</a>
             </nav>
         </header>
 
         <div class="main-content">
             <div class="menu-section">
-                <h2>📋 เมนูอาหาร</h2>
+                <h2 data-i18n="menu">📋 เมนูอาหาร</h2>
                 
                 <div class="category" id="new">
-                    <h3>เนื้อหมูสดใหม่</h3>
+                    <h3 data-i18n="categoryNew">เนื้อหมูสดใหม่</h3>
                     <div class="product-grid">
                         <div class="product-card" data-id="1" data-name="เนื้อหมูกระสำชาด" data-price="180">
                             <div class="product-info">
@@ -66,7 +66,7 @@
                 </div>
 
                 <div class="category" id="sausage">
-                    <h3>ลูกชิน และ ไส้กรอก</h3>
+                    <h3 data-i18n="categorySausage">ลูกชิน และ ไส้กรอก</h3>
                     <div class="product-grid">
                         <div class="product-card" data-id="4" data-name="ลูกชิน หมูมหาไทร" data-price="111">
                             <div class="product-info">
@@ -99,7 +99,7 @@
                 </div>
 
                 <div class="category" id="pork">
-                    <h3>หนังชิงช้าง</h3>
+                    <h3 data-i18n="categoryPork">หนังชิงช้าง</h3>
                     <div class="product-grid">
                         <div class="product-card" data-id="7" data-name="หนังชิงช้างกรอบ" data-price="120">
                             <div class="product-info">
@@ -123,7 +123,7 @@
                 </div>
 
                 <div class="category" id="beef">
-                    <h3>คอโงกกา</h3>
+                    <h3 data-i18n="categoryBeef">คอโงกกา</h3>
                     <div class="product-grid">
                         <div class="product-card" data-id="9" data-name="คอโงกกาย่าง" data-price="180">
                             <div class="product-info">
@@ -147,7 +147,7 @@
                 </div>
 
                 <div class="category" id="other">
-                    <h3>ค้านนากา</h3>
+                    <h3 data-i18n="categoryOther">ค้านนากา</h3>
                     <div class="product-grid">
                         <div class="product-card" data-id="11" data-name="ค้านนากาหั่นบาง" data-price="140">
                             <div class="product-info">
@@ -172,7 +172,7 @@
             </div>
 
             <div class="order-section">
-                <h2>🛒 รายการสั่งอาหาร</h2>
+                <h2 data-i18n="orderList">🛒 รายการสั่งอาหาร</h2>
                 <div id="orderList" class="order-list">
                     <div class="empty-order">
                         ยังไม่มีรายการอาหาร<br>กรุณาเลือกเมนูที่ต้องการ
@@ -180,14 +180,14 @@
                 </div>
                 <div class="order-summary">
                     <div class="summary-row">
-                        <span>จำนวนรายการ:</span>
+                        <span data-i18n="itemCount">จำนวนรายการ:</span>
                         <span id="itemCount">0</span>
                     </div>
                     <div class="summary-row total">
-                        <span>ยอดรวมทั้งหมด:</span>
+                        <span data-i18n="totalPrice">ยอดรวมทั้งหมด:</span>
                         <span id="totalPrice">0 บาท</span>
                     </div>
-                    <button class="confirm-btn" id="confirmBtn" onclick="confirmOrder()" disabled>
+                    <button class="confirm-btn" id="confirmBtn" onclick="confirmOrder()" disabled data-i18n="confirmBtn">
                         ยืนยันคำสั่งซื้อ
                     </button>
                 </div>
