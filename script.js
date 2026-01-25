@@ -134,8 +134,59 @@ class FoodOrderSystem {
     }
 
     init() {
+        this.loadDynamicProducts();
         this.updateOrderDisplay();
         this.applyTranslations();
+    }
+
+    loadDynamicProducts() {
+        // Load products from localStorage if available
+        const productsData = localStorage.getItem('products');
+        if (!productsData) return;
+
+        const products = JSON.parse(productsData);
+        
+        // Group products by category
+        const categories = {
+            'new': document.querySelector('#new .product-grid'),
+            'sausage': document.querySelector('#sausage .product-grid'),
+            'sai-grog': document.querySelector('#sai-grog .product-grid'),
+            'luk-chin': document.querySelector('#luk-chin .product-grid'),
+            'other': document.querySelector('#other .product-grid')
+        };
+
+        // Clear existing products
+        Object.values(categories).forEach(grid => {
+            if (grid) grid.innerHTML = '';
+        });
+
+        // Add products to their respective categories
+        products.forEach(product => {
+            const grid = categories[product.category];
+            if (!grid) return;
+
+            const productCard = document.createElement('div');
+            productCard.className = 'product-card';
+            productCard.setAttribute('data-id', product.id);
+            productCard.setAttribute('data-name', product.nameTh);
+            productCard.setAttribute('data-price', product.price);
+
+            productCard.innerHTML = `
+                <div class="product-info">
+                    <div class="product-name" data-i18n="product${product.id}">${this.escapeHtml(product.nameTh)}</div>
+                    <div class="product-price">฿ ${product.price}.-</div>
+                </div>
+                <button class="add-btn" onclick="addToOrder(${product.id})">
+                    <span class="leaf-icon">🌿</span>
+                </button>
+            `;
+
+            grid.appendChild(productCard);
+
+            // Update translations object dynamically
+            translations.th[`product${product.id}`] = product.nameTh;
+            translations.ru[`product${product.id}`] = product.nameRu;
+        });
     }
 
     addToOrder(itemId) {
