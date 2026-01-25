@@ -39,12 +39,12 @@ const translations = {
         copyright: "&copy; 2024 POOH Food Shop. All rights reserved.",
         // Navigation
         navNew: "เนื้อหมูสดใหม่",
-        navSausage: "ลูกชิน-ไส้กรอก",
+        navSausage: "แหนม",
         navOther: "ค้านนากา",
         navOrder: "สั่งซื้อเร็ว!",
         // Categories
         categoryNew: "เนื้อหมูสดใหม่",
-        categorySausage: "ลูกชิน และ ไส้กรอก",
+        categorySausage: "แหนม",
         categoryOther: "ค้านนากา",
         // Product names
         product1: "เนื้อหมูกระสำชาด",
