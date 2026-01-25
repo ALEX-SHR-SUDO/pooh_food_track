@@ -90,12 +90,12 @@ const translations = {
         copyright: "&copy; 2024 POOH Food Shop. Все права защищены.",
         // Navigation
         navNew: "Свежая свинина",
-        navSausage: "Фрикадельки-Колбаски",
+        navSausage: "нэм",
         navOther: "Специальное",
         navOrder: "Быстрый заказ!",
         // Categories
         categoryNew: "Свежая свинина",
-        categorySausage: "Фрикадельки и колбаски",
+        categorySausage: "нэм",
         categoryOther: "Специальное",
         // Product names
         product1: "Свинина Красамчад",
