@@ -267,6 +267,14 @@ h2 {
     min-height: 180px;
 }
 
+.product-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
 .product-card::before {
     content: '';
     position: absolute;

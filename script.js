@@ -174,6 +174,7 @@ class FoodOrderSystem {
             productCard.setAttribute('data-price', product.price);
 
             productCard.innerHTML = `
+                ${product.image ? `<img src="${this.escapeHtml(product.image)}" alt="${this.escapeHtml(product.nameTh)}" class="product-image" onerror="this.style.display='none'">` : ''}
                 <div class="product-info">
                     <div class="product-name" data-i18n="product${product.id}">${this.escapeHtml(product.nameTh)}</div>
                     <div class="product-price">฿ ${product.price}.-</div>
