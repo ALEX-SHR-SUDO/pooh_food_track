@@ -53,7 +53,7 @@ const translations = {
         // Product names
         product1: "เนื้อหมูกระสำชาด",
         product2: "หมูสามชั้น",
-        product3: "เนื้อสำเน่า",
+        product3: "สเต็กหมู",
         product4: "ลูกชิน หมูมหาไทร",
         product5: "ลูกชิน หมูมหาไทร",
         product6: "แกนตะเปลืองสีกะอา",
@@ -112,7 +112,7 @@ const translations = {
         // Product names
         product1: "Свинина Красамчад",
         product2: "Свиная грудинка",
-        product3: "Свинина Самнао",
+        product3: "Свиной стейк",
         product4: "Фрикадельки Свиные Махатай",
         product5: "Фрикадельки Свиные Махатай",
         product6: "Колбаски Сикао",
