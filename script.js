@@ -111,7 +111,7 @@ const translations = {
         categoryOther: "Специальное",
         // Product names
         product1: "Свинина Красамчад",
-        product2: "Свиная грудинка ",
+        product2: "Свиная грудинка",
         product3: "Свинина Самнао",
         product4: "Фрикадельки Свиные Махатай",
         product5: "Фрикадельки Свиные Махатай",
