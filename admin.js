@@ -101,7 +101,7 @@ class AdminSystem {
         // Initialize with default products if none exist
         if (!localStorage.getItem('products')) {
             const defaultProducts = [
-                { id: 1, nameTh: "เนื้อหมูกระสำชาด", nameRu: "Свинина Красамчад", price: 180, category: "new", image: "" },
+                { id: 1, nameTh: "เนื้อหมูกระสำชาด", nameRu: "Свинина Красамчад", price: 180, category: "new", image: "image/miaso.png" },
                 { id: 2, nameTh: "หมูสามชั้นสเต็ก", nameRu: "Стейк из свиной грудинки", price: 75, category: "new", image: "" },
                 { id: 3, nameTh: "เนื้อสำเน่า", nameRu: "Свинина Самнао", price: 75, category: "new", image: "" },
                 { id: 4, nameTh: "ลูกชิน หมูมหาไทร", nameRu: "Фрикадельки Свиные Махатай", price: 111, category: "sausage", image: "" },
