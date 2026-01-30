@@ -669,12 +669,4 @@ h2 {
     }
 }
 
-/* Specific adjustment for Pork Steak image - move down by 30px */
-.product-card[data-id="3"] {
-    overflow: visible;
-    padding-bottom: 30px;
-}
 
-.product-card[data-id="3"] .product-image {
-    transform: translateY(30px);
-}
