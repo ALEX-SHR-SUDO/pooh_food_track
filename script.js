@@ -62,7 +62,8 @@ const translations = {
         product9: "1 - po zene 10 bath",
         product10: "2 - po zene 20 bath",
         product11: "ค้านนากาหั่นบาง",
-        product12: "ค้านนากาพิเศษ"
+        product12: "ค้านนากาพิเศษ",
+        product13: "สเต็กหมูติดกระดูก"
     },
     ru: {
         title: "POOH - Система отслеживания еды",
@@ -121,7 +122,8 @@ const translations = {
         product9: "1 - по цене 10 бат",
         product10: "2 - по цене 20 бат",
         product11: "Канака нарезанная тонко",
-        product12: "Канака специальная"
+        product12: "Канака специальная",
+        product13: "Стейк на косточке"
     }
 };
 
