@@ -51,7 +51,7 @@ const translations = {
         categoryLukChin: "ลูกชิ้น",
         categoryOther: "หมูยอ",
         // Product names
-        product1: "เนื้อหมูกระสำชาด",
+        product1: "เนื้อหมู",
         product2: "หมูสามชั้น",
         product3: "สเต็กหมู",
         product4: "แหนมหมู",
