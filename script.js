@@ -42,14 +42,14 @@ const translations = {
         navSausage: "แหนม",
         navSaiGrog: "ไส้กรอก",
         navLukChin: "ลูกชิ้น",
-        navOther: "ค้านนากา",
+        navOther: "หมูยอ",
         navOrder: "สั่งซื้อเร็ว!",
         // Categories
         categoryNew: "เนื้อหมูสดใหม่",
         categorySausage: "แหนม",
         categorySaiGrog: "ไส้กรอก",
         categoryLukChin: "ลูกชิ้น",
-        categoryOther: "ค้านนากา",
+        categoryOther: "หมูยอ",
         // Product names
         product1: "เนื้อหมูกระสำชาด",
         product2: "หมูสามชั้น",
@@ -60,8 +60,7 @@ const translations = {
         product8: "ไส้กรอกเนื้อ",
         product9: "ลูกชิ้นหมู",
         product10: "ลูกชิ้นเนื้อ",
-        product11: "ค้านนากาหั่นบาง",
-        product12: "ค้านนากาพิเศษ",
+        product11: "หมูยอ",
         product13: "สเต็กหมูติดกระดูก",
         product14: "ไส้กรอกเนื้อเผ็ด"
     },
@@ -120,8 +119,7 @@ const translations = {
         product8: "Сосиски говяжьи",
         product9: "Свиные фрикадельки",
         product10: "Говяжьи фрикадельки",
-        product11: "Канака нарезанная тонко",
-        product12: "Канака специальная",
+        product11: "Свиная ветчина",
         product13: "Стейк на косточке",
         product14: "Острые говяжьи сосиски"
     }
