@@ -179,7 +179,7 @@ class FoodOrderSystem {
                     <div class="product-price">฿ ${product.price}.-</div>
                 </div>
                 <button class="add-btn" onclick="addToOrder(${product.id})">
-                    <span class="leaf-icon">🌿</span>
+                    <span class="button-icon">🛒</span>
                 </button>
             `;
 
