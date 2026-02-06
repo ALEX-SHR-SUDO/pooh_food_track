@@ -308,6 +308,68 @@ Access to fetch at 'http://localhost:3000' blocked by CORS policy
 
 ## Production Deployment
 
+### Вариант 1: ZeroTier VPN (Рекомендуется, БЕЗ VPS!)
+
+Самый простой и дешевый способ - использовать ZeroTier VPN для подключения роутера к Render.com.
+
+#### Преимущества:
+- ✅ **Бесплатно** (до 100 устройств)
+- ✅ **Не требует VPS** (экономия $5-15/месяц)
+- ✅ **Автоматический деплой** через Render.com
+- ✅ **Безопасное шифрованное соединение** (AES-256)
+- ✅ **Простая настройка** (10-15 минут)
+- ✅ **Надежно** (99.9% uptime, автоматическое переподключение)
+
+#### 📚 Полная инструкция: [ZEROTIER_SETUP.md](ZEROTIER_SETUP.md)
+
+#### Быстрые шаги:
+
+1. **Создайте ZeroTier сеть**
+   - Зарегистрируйтесь на https://my.zerotier.com
+   - Создайте новую сеть (Network ID будет вида: `1234567890abcdef`)
+
+2. **Настройте роутер LT500**
+   - Зайдите в веб-интерфейс роутера: http://192.168.10.1
+   - Перейдите в **VPN → Protocol: "ZeroTier Slave"**
+   - Введите Network ID
+   - Включите VPN
+   - Авторизуйте роутер на my.zerotier.com
+
+3. **Деплой на Render.com**
+   - Push код в GitHub
+   - Render автоматически задеплоит оба сервиса:
+     * `pooh-zerotier-gateway` (ZeroTier клиент)
+     * `pooh-food-sms-backend` (SMS сервер)
+
+4. **Настройте Environment Variables в Render**
+   ```
+   # В pooh-zerotier-gateway:
+   ZEROTIER_NETWORK_ID=1234567890abcdef
+   ROUTER_ZEROTIER_IP=10.147.17.5
+   
+   # В pooh-food-sms-backend:
+   ROUTER_IP=http://pooh-zerotier-gateway:10000
+   ROUTER_USER=admin
+   ROUTER_PASS=your_password
+   ```
+
+5. **Авторизуйте Gateway на my.zerotier.com**
+   - После деплоя Gateway появится в списке устройств
+   - Поставьте галочку Auth
+
+6. **Готово!** SMS работает через защищенное ZeroTier соединение
+
+#### Стоимость:
+- **ZeroTier:** БЕСПЛАТНО
+- **Render.com Hobby:** $7/месяц (или бесплатно с ограничениями)
+- **Итого:** $7/месяц vs $12-20/месяц с VPS
+
+---
+
+### Вариант 2: VPS с прямым подключением
+
+Если ZeroTier не подходит, можно использовать классический VPS.
+
 ### 1. VPS Setup
 
 **Recommended Specs:**
