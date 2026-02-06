@@ -22,12 +22,14 @@ const ROUTER_IP = process.env.ROUTER_IP || '192.168.10.1';
 const ROUTER_PROTOCOL = process.env.ROUTER_PROTOCOL || 'http';
 const ROUTER_USER = process.env.ROUTER_USER || 'admin';
 const ROUTER_PASS = process.env.ROUTER_PASS || 'admin';
+const ROUTER_STRICT_SSL = process.env.ROUTER_STRICT_SSL === 'true'; // Default false for self-signed certs
 
 const routerApi = new CudyLT500_API(
     ROUTER_IP,
     ROUTER_USER,
     ROUTER_PASS,
-    ROUTER_PROTOCOL
+    ROUTER_PROTOCOL,
+    ROUTER_STRICT_SSL
 );
 
 // In-memory storage for verification codes

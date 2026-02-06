@@ -9,11 +9,12 @@ const fetchCookie = require('fetch-cookie');
 const https = require('https');
 
 class CudyLT500_API {
-    constructor(routerIp, username, password, protocol = 'http') {
+    constructor(routerIp, username, password, protocol = 'http', strictSSL = false) {
         this.routerIp = routerIp;
         this.username = username;
         this.password = password;
         this.protocol = protocol;
+        this.strictSSL = strictSSL; // Allow disabling SSL verification for self-signed certs
         this.baseUrl = `${protocol}://${routerIp}`;
         this.cookieJar = new CookieJar();
         this.fetch = fetchCookie(fetch, this.cookieJar);
@@ -21,6 +22,9 @@ class CudyLT500_API {
         this.sysauthCookie = null;
         
         console.log(`📡 Router API initialized: ${this.baseUrl}`);
+        if (protocol === 'https' && !strictSSL) {
+            console.log('⚠️  SSL certificate validation disabled for self-signed certificates');
+        }
     }
 
     /**
@@ -154,8 +158,11 @@ class CudyLT500_API {
                 signal: controller.signal
             };
             
-            // Disable SSL verification for self-signed certificates if HTTPS
-            if (this.protocol === 'https') {
+            // Note: Disable SSL verification for self-signed certificates if HTTPS and strictSSL=false
+            // This is common for local/embedded routers that use self-signed certificates
+            // Security: This is acceptable because we're connecting to a known local router in a private network
+            // For production with proper SSL certificates, set ROUTER_STRICT_SSL=true
+            if (this.protocol === 'https' && !this.strictSSL) {
                 fetchOptions.agent = new https.Agent({ rejectUnauthorized: false });
             }
             
