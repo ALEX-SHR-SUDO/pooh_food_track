@@ -1,0 +1,19 @@
+services:
+  # Backend SMS Server
+  - type: web
+    name: pooh-food-sms-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 25.6.0
+      - key: PORT
+        generateValue: true
+      - key: ROUTER_IP
+        sync: false
+      - key: ROUTER_USER
+        sync: false
+      - key: ROUTER_PASS
+        sync: false
