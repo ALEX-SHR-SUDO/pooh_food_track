@@ -1,6 +1,69 @@
-# Vercel Deployment Guide
+# Deployment Guide
 
-## Quick Deploy to Vercel
+## Deploy Backend to Render
+
+### Prerequisites
+- GitHub account connected to Render
+- Cudy LT500 Router accessible from the internet (with port forwarding configured)
+- Router credentials
+
+### Method 1: Auto-Deploy with render.yaml
+
+1. Push your code to GitHub (already includes `render.yaml`)
+2. Go to [Render Dashboard](https://dashboard.render.com)
+3. Click "New" → "Blueprint"
+4. Connect your GitHub repository
+5. Render will automatically detect `render.yaml` and create the service
+
+### Method 2: Manual Deploy
+
+1. Go to [Render Dashboard](https://dashboard.render.com)
+2. Click "New" → "Web Service"
+3. Connect your GitHub repository
+4. Configure the service:
+   - **Name**: pooh-food-sms-backend
+   - **Root Directory**: `backend`
+   - **Environment**: Node
+   - **Build Command**: `npm install`
+   - **Start Command**: `npm start`
+5. Add Environment Variables:
+   - `ROUTER_IP`: Your Cudy router's public IP or domain
+   - `ROUTER_USER`: Router admin username (default: admin)
+   - `ROUTER_PASS`: Router admin password
+   - `PORT`: Auto-assigned by Render
+6. Click "Create Web Service"
+
+### After Deployment
+
+1. Wait for the build to complete (first build takes 2-3 minutes)
+2. Get your backend URL (e.g., `https://pooh-food-sms-backend.onrender.com`)
+3. Update your frontend `script.js` with the backend URL
+4. Configure your router for external access:
+   - Enable port forwarding if needed
+   - Whitelist Render's IP range in router firewall
+   - Test connectivity from external network
+
+### Troubleshooting Render Deployment
+
+**Build fails with "Cannot find package.json":**
+- Ensure `render.yaml` exists in repository root
+- Verify `rootDir: backend` is set correctly
+- Check that `backend/package.json` exists
+
+**Service starts but SMS doesn't work:**
+- Verify router is accessible from internet
+- Check environment variables are set correctly
+- Review logs in Render dashboard
+- Test router API endpoints manually
+
+**502 Bad Gateway or service crashes:**
+- Check logs for startup errors
+- Verify all dependencies installed correctly
+- Ensure PORT environment variable is not hardcoded
+
+## Deploy Frontend to Vercel
+
+### Vercel Deployment
 
 ### Method 1: Deploy via Vercel CLI
 
