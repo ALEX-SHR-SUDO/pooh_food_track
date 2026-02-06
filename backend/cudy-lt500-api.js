@@ -80,9 +80,10 @@ class CudyLT500_API {
      * Send SMS through the router
      * @param {string} phoneNumber - Recipient phone number (e.g., +972501234567)
      * @param {string} message - SMS message text
+     * @param {boolean} isRetry - Internal flag to prevent infinite recursion
      * @returns {Promise<boolean>} Success status
      */
-    async sendSMS(phoneNumber, message) {
+    async sendSMS(phoneNumber, message, isRetry = false) {
         if (!this.isAuthenticated) {
             console.log('Not authenticated, attempting login...');
             const loginSuccess = await this.login();
@@ -117,14 +118,14 @@ class CudyLT500_API {
                 const responseText = await response.text();
                 console.error(`✗ Failed to send SMS: ${response.status} - ${responseText}`);
                 
-                // If unauthorized, try to re-authenticate
-                if (response.status === 401 || response.status === 403) {
+                // If unauthorized, try to re-authenticate (only once to prevent infinite loop)
+                if ((response.status === 401 || response.status === 403) && !isRetry) {
                     console.log('Session expired, re-authenticating...');
                     this.isAuthenticated = false;
                     const loginSuccess = await this.login();
                     if (loginSuccess) {
-                        // Retry SMS send after re-authentication
-                        return this.sendSMS(phoneNumber, message);
+                        // Retry SMS send after re-authentication (with isRetry flag)
+                        return this.sendSMS(phoneNumber, message, true);
                     }
                 }
                 return false;

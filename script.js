@@ -400,7 +400,9 @@ class FoodOrderSystem {
             alert(t.requireAuth || (this.currentLang === 'ru' 
                 ? 'Пожалуйста, войдите в систему с номером телефона для подтверждения заказа' 
                 : 'กรุณาเข้าสู่ระบบด้วยเบอร์โทรศัพท์เพื่อยืนยันคำสั่งซื้อ'));
-            phoneAuth.showPhoneModal();
+            if (phoneAuth && phoneAuth.showPhoneModal) {
+                phoneAuth.showPhoneModal();
+            }
             return;
         }
 
