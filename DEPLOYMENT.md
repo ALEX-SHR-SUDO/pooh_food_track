@@ -47,7 +47,7 @@
 
 **Build fails with "Cannot find package.json":**
 - Ensure `render.yaml` exists in repository root
-- Verify `rootDir: backend` is set correctly
+- Verify build command includes `cd backend &&` prefix
 - Check that `backend/package.json` exists
 
 **Service starts but SMS doesn't work:**

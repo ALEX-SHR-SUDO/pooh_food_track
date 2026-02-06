@@ -1,11 +1,12 @@
 services:
   # Backend SMS Server
+  # Note: Using explicit 'cd backend &&' instead of rootDir due to Render platform issues
+  # with rootDir not being respected during build phase
   - type: web
     name: pooh-food-sms-backend
     env: node
-    rootDir: backend
-    buildCommand: npm install
-    startCommand: npm start
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
     envVars:
       - key: NODE_VERSION
         value: 25.6.0
