@@ -61,4 +61,4 @@ fi
 
 # Start HTTP proxy to router
 echo "🔄 Starting HTTP proxy: localhost:10000 -> $ROUTER_ZEROTIER_IP:80"
-exec socat TCP-LISTEN:10000,fork,reuseaddr TCP:$ROUTER_ZEROTIER_IP:80
+exec socat TCP-LISTEN:10000,fork,reuseaddr TCP:"$ROUTER_ZEROTIER_IP":80

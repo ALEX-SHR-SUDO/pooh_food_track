@@ -6,6 +6,7 @@
 const fetch = require('node-fetch');
 const { CookieJar } = require('tough-cookie');
 const fetchCookie = require('fetch-cookie');
+const https = require('https');
 
 class CudyLT500_API {
     constructor(routerIp, username, password, protocol = 'http') {
@@ -155,7 +156,6 @@ class CudyLT500_API {
             
             // Disable SSL verification for self-signed certificates if HTTPS
             if (this.protocol === 'https') {
-                const https = require('https');
                 fetchOptions.agent = new https.Agent({ rejectUnauthorized: false });
             }
             

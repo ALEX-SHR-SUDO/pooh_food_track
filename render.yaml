@@ -24,7 +24,7 @@ services:
       - key: NODE_VERSION
         value: 25.6.0
       - key: PORT
-        value: 10000
+        value: 10000  # Must match ZeroTier gateway port for internal routing
       - key: ROUTER_IP
         value: pooh-zerotier-gateway:10000  # Internal service communication
       - key: ROUTER_PROTOCOL

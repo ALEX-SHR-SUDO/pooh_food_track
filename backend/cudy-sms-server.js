@@ -352,8 +352,7 @@ app.listen(PORT, '0.0.0.0', () => {
         if (isConnected) {
             console.log('✓ Router connection successful');
         } else {
-            console.warn('⚠ Warning: Cannot connect to router. Please check configuration.');
-            console.warn(`✗ Router connection check failed: network timeout at: ${ROUTER_PROTOCOL}://${ROUTER_IP}/cgi-bin/luci`);
+            console.warn('⚠ Warning: Cannot connect to router at ' + ROUTER_PROTOCOL + '://' + ROUTER_IP + '/cgi-bin/luci');
             if (NODE_ENV === 'production') {
                 console.warn('💡 Make sure ZeroTier gateway is running and ROUTER_IP is set correctly.');
             }

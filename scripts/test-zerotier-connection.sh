@@ -11,7 +11,7 @@ fi
 ROUTER_IP=$1
 
 echo "📡 Pinging router at $ROUTER_IP..."
-if ping -c 3 $ROUTER_IP; then
+if ping -c 3 "$ROUTER_IP"; then
     echo "✅ Ping successful!"
 else
     echo "❌ Ping failed!"
@@ -19,7 +19,7 @@ else
 fi
 
 echo "🌐 Testing HTTP connection..."
-if curl -s -o /dev/null -w "%{http_code}" http://$ROUTER_IP/cgi-bin/luci | grep -q "200\|401"; then
+if curl -s -o /dev/null -w "%{http_code}" "http://$ROUTER_IP/cgi-bin/luci" | grep -q "200\|401"; then
     echo "✅ HTTP connection successful!"
 else
     echo "❌ HTTP connection failed!"
