@@ -20,7 +20,8 @@ app.use(express.urlencoded({ extended: true }));
 const routerApi = new CudyLT500_API(
     process.env.ROUTER_IP || '192.168.10.1',
     process.env.ROUTER_USER || 'admin',
-    process.env.ROUTER_PASS || 'admin'
+    process.env.ROUTER_PASS || 'admin',
+    process.env.ROUTER_PROTOCOL || 'http'
 );
 
 // In-memory storage for verification codes
@@ -249,6 +250,64 @@ app.post('/api/send-sms', async (req, res) => {
 });
 
 /**
+ * GET /api/health
+ * Health check endpoint for monitoring
+ */
+app.get('/api/health', async (req, res) => {
+    try {
+        const isConnected = await routerApi.checkConnection();
+        
+        res.json({
+            status: isConnected ? 'healthy' : 'unhealthy',
+            router: {
+                ip: process.env.ROUTER_IP || '192.168.10.1',
+                protocol: process.env.ROUTER_PROTOCOL || 'http',
+                connected: isConnected
+            },
+            environment: process.env.NODE_ENV || 'development',
+            timestamp: new Date().toISOString()
+        });
+    } catch (error) {
+        console.error('Health check error:', error);
+        res.status(503).json({
+            status: 'unhealthy',
+            error: 'Health check failed',
+            environment: process.env.NODE_ENV || 'development'
+        });
+    }
+});
+
+/**
+ * GET /api/router-status
+ * Detailed router status information
+ */
+app.get('/api/router-status', async (req, res) => {
+    try {
+        const isConnected = await routerApi.checkConnection();
+        
+        res.json({
+            success: true,
+            router: {
+                ip: process.env.ROUTER_IP || '192.168.10.1',
+                protocol: process.env.ROUTER_PROTOCOL || 'http',
+                connected: isConnected,
+                authenticated: routerApi.isAuthenticated,
+                baseUrl: routerApi.baseUrl
+            },
+            activeCodes: verificationCodes.size,
+            environment: process.env.NODE_ENV || 'development',
+            timestamp: new Date().toISOString()
+        });
+    } catch (error) {
+        console.error('Router status check error:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Failed to check router status'
+        });
+    }
+});
+
+/**
  * GET /api/status
  * Check router connectivity and server status
  */
@@ -296,11 +355,16 @@ app.use((err, req, res, next) => {
 
 // Start server
 app.listen(PORT, () => {
+    const environment = process.env.NODE_ENV || 'development';
+    const routerConfig = `${process.env.ROUTER_PROTOCOL || 'http'}://${process.env.ROUTER_IP || '192.168.10.1'}`;
+    
     console.log(`
 ╔═══════════════════════════════════════════════╗
 ║     🍽️  POOH Food SMS Server                  ║
 ║     🚀 Server running on port ${PORT}          ║
 ║     📱 Cudy LT500 SMS Gateway Active          ║
+║     🌍 Environment: ${environment.padEnd(12)}         ║
+║     🔗 Router: ${routerConfig.padEnd(30)} ║
 ╚═══════════════════════════════════════════════╝
     `);
     
@@ -310,6 +374,11 @@ app.listen(PORT, () => {
             console.log('✓ Router connection successful');
         } else {
             console.log('⚠ Warning: Cannot connect to router. Please check configuration.');
+            console.log(`   Router URL: ${routerConfig}`);
+            console.log(`   Environment: ${environment}`);
+            if (environment === 'production') {
+                console.log('   💡 Make sure ZeroTier gateway is running and router is connected to ZeroTier network');
+            }
         }
     });
 });

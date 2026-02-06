@@ -1,4 +1,18 @@
 services:
+  # ZeroTier Gateway Service
+  # Docker container that connects to ZeroTier network and proxies requests to the router
+  - type: web
+    name: pooh-zerotier-gateway
+    env: docker
+    dockerfilePath: ./Dockerfile.zerotier
+    envVars:
+      - key: ZEROTIER_NETWORK_ID
+        sync: false
+      - key: ROUTER_ZEROTIER_IP
+        sync: false
+      - key: PORT
+        value: 10000
+
   # Backend SMS Server
   # Note: Using explicit 'cd backend &&' instead of rootDir due to Render platform issues
   # with rootDir not being respected during build phase
@@ -11,9 +25,11 @@ services:
       - key: NODE_VERSION
         value: 25.6.0
       - key: PORT
-        generateValue: true
+        value: 10000
       - key: ROUTER_IP
-        sync: false
+        value: pooh-zerotier-gateway.onrender.com
+      - key: ROUTER_PROTOCOL
+        value: http
       - key: ROUTER_USER
         sync: false
       - key: ROUTER_PASS

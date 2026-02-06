@@ -8,11 +8,12 @@ const { CookieJar } = require('tough-cookie');
 const fetchCookie = require('fetch-cookie');
 
 class CudyLT500_API {
-    constructor(routerIp, username, password) {
+    constructor(routerIp, username, password, protocol = 'http') {
         this.routerIp = routerIp;
         this.username = username;
         this.password = password;
-        this.baseUrl = `http://${routerIp}`;
+        this.protocol = protocol;
+        this.baseUrl = `${protocol}://${routerIp}`;
         this.cookieJar = new CookieJar();
         this.fetch = fetchCookie(fetch, this.cookieJar);
         this.isAuthenticated = false;
@@ -40,7 +41,8 @@ class CudyLT500_API {
                     'Referer': `${this.baseUrl}/cgi-bin/luci`
                 },
                 body: formData.toString(),
-                redirect: 'manual' // Don't follow redirects automatically
+                redirect: 'manual', // Don't follow redirects automatically
+                timeout: 15000 // 15 second timeout for VPN connections
             });
 
             // Check if authentication was successful
@@ -70,7 +72,9 @@ class CudyLT500_API {
             console.error('✗ Authentication failed - no sysauth cookie received');
             return false;
         } catch (error) {
-            console.error('✗ Login error:', error.message);
+            console.error(`✗ Login error: ${error.message}`);
+            console.error(`   Router: ${this.protocol}://${this.routerIp}`);
+            console.error(`   Environment: ${process.env.NODE_ENV || 'development'}`);
             this.isAuthenticated = false;
             return false;
         }
@@ -108,7 +112,8 @@ class CudyLT500_API {
                     'X-Requested-With': 'XMLHttpRequest',
                     'Referer': `${this.baseUrl}/cgi-bin/luci/admin/network/gcom/sms`
                 },
-                body: formData.toString()
+                body: formData.toString(),
+                timeout: 20000 // 20 second timeout for SMS sending via VPN
             });
 
             if (response.ok) {
@@ -142,13 +147,23 @@ class CudyLT500_API {
      */
     async checkConnection() {
         try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout for VPN
+            
             const response = await fetch(`${this.baseUrl}/cgi-bin/luci`, {
                 method: 'GET',
-                timeout: 5000
+                signal: controller.signal
             });
+            
+            clearTimeout(timeoutId);
             return response.ok || response.status === 401; // 401 means router is reachable but needs auth
         } catch (error) {
-            console.error('✗ Router connection check failed:', error.message);
+            if (error.name === 'AbortError') {
+                console.error(`✗ Router connection timeout (10s): ${this.protocol}://${this.routerIp}`);
+            } else {
+                console.error(`✗ Router connection check failed: ${error.message}`);
+                console.error(`   Router: ${this.protocol}://${this.routerIp}`);
+            }
             return false;
         }
     }
