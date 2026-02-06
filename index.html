@@ -17,6 +17,9 @@
                     <button class="lang-btn active" data-lang="th" onclick="orderSystem.switchLanguage('th')">🇹🇭 ไทย</button>
                     <button class="lang-btn" data-lang="ru" onclick="orderSystem.switchLanguage('ru')">Русский</button>
                 </div>
+                <div class="auth-section">
+                    <!-- Auth buttons will be inserted here by JavaScript -->
+                </div>
             </div>
             <nav class="nav-menu">
                 <a href="#new" class="nav-item" data-i18n="navNew">เนื้อหมูสดใหม่</a>
@@ -262,6 +265,67 @@
                 <p>&copy; 2024 POOH Food Shop. All rights reserved.</p>
             </div>
         </footer>
+    </div>
+
+    <!-- Phone Number Modal -->
+    <div id="phoneModal" class="modal">
+        <div class="modal-content">
+            <h2 data-i18n="phoneModalTitle">📱 เข้าสู่ระบบด้วยเบอร์โทร</h2>
+            <form onsubmit="event.preventDefault(); phoneAuth.sendVerificationCode();">
+                <div class="form-group">
+                    <label for="phoneInput" data-i18n="phoneInputLabel">หมายเลขโทรศัพท์</label>
+                    <input 
+                        type="tel" 
+                        id="phoneInput" 
+                        class="form-input"
+                        pattern="^\+?[1-9]\d{1,14}$"
+                        data-i18n-placeholder="phoneInputPlaceholder"
+                        placeholder="+972501234567"
+                        required
+                    />
+                    <div class="error-message" id="phoneError"></div>
+                </div>
+                <div class="modal-buttons">
+                    <button type="submit" class="submit-btn">
+                        <span data-i18n="sendCodeBtn">ส่งรหัสยืนยัน</span>
+                    </button>
+                    <button type="button" class="cancel-btn" onclick="phoneAuth.hidePhoneModal()">
+                        <span data-i18n="cancelBtn">ยกเลิก</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Verification Code Modal -->
+    <div id="codeModal" class="modal">
+        <div class="modal-content">
+            <h2 data-i18n="codeModalTitle">🔐 กรอกรหัสยืนยัน</h2>
+            <form onsubmit="event.preventDefault(); phoneAuth.verifyCode();">
+                <div class="form-group">
+                    <label for="codeInput" data-i18n="codeInputLabel">รหัสยืนยัน 4 หลัก</label>
+                    <input 
+                        type="text" 
+                        id="codeInput" 
+                        class="form-input code-input"
+                        maxlength="4"
+                        pattern="[0-9]{4}"
+                        data-i18n-placeholder="codeInputPlaceholder"
+                        placeholder="1234"
+                        required
+                    />
+                    <div class="error-message" id="codeError"></div>
+                </div>
+                <div class="modal-buttons">
+                    <button type="submit" class="submit-btn">
+                        <span data-i18n="verifyCodeBtn">ยืนยันรหัส</span>
+                    </button>
+                    <button type="button" class="cancel-btn" onclick="phoneAuth.hideCodeModal()">
+                        <span data-i18n="cancelBtn">ยกเลิก</span>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script src="script.js"></script>

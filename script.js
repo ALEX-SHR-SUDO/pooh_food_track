@@ -63,7 +63,20 @@ const translations = {
         product11: "หมูยอ",
         product13: "สเต็กหมูติดกระดูก",
         product14: "ไส้กรอกเนื้อเผ็ด",
-        perKg: "/กก."
+        perKg: "/กก.",
+        // Authentication
+        loginBtn: "เข้าสู่ระบบด้วยเบอร์โทร",
+        logoutBtn: "ออกจากระบบ",
+        requireAuth: "กรุณาเข้าสู่ระบบด้วยเบอร์โทรศัพท์เพื่อยืนยันคำสั่งซื้อ",
+        phoneModalTitle: "📱 เข้าสู่ระบบด้วยเบอร์โทร",
+        phoneInputLabel: "หมายเลขโทรศัพท์",
+        phoneInputPlaceholder: "+972501234567",
+        sendCodeBtn: "ส่งรหัสยืนยัน",
+        codeModalTitle: "🔐 กรอกรหัสยืนยัน",
+        codeInputLabel: "รหัสยืนยัน 4 หลัก",
+        codeInputPlaceholder: "1234",
+        verifyCodeBtn: "ยืนยันรหัส",
+        cancelBtn: "ยกเลิก"
     },
     ru: {
         title: "POOH - Система отслеживания еды",
@@ -123,7 +136,20 @@ const translations = {
         product11: "Свиная ветчина",
         product13: "Стейк на косточке",
         product14: "Острые говяжьи сосиски",
-        perKg: "/за кг"
+        perKg: "/за кг",
+        // Authentication
+        loginBtn: "Войти по телефону",
+        logoutBtn: "Выйти",
+        requireAuth: "Пожалуйста, войдите в систему с номером телефона для подтверждения заказа",
+        phoneModalTitle: "📱 Войти по телефону",
+        phoneInputLabel: "Номер телефона",
+        phoneInputPlaceholder: "+972501234567",
+        sendCodeBtn: "Отправить код",
+        codeModalTitle: "🔐 Введите код подтверждения",
+        codeInputLabel: "Код подтверждения (4 цифры)",
+        codeInputPlaceholder: "1234",
+        verifyCodeBtn: "Подтвердить",
+        cancelBtn: "Отмена"
     }
 };
 
@@ -368,6 +394,18 @@ class FoodOrderSystem {
     confirmOrder() {
         if (Object.keys(this.order).length === 0) return;
 
+        // Check if user is authenticated
+        if (!phoneAuth || !phoneAuth.isAuthenticated()) {
+            const t = translations[this.currentLang];
+            alert(t.requireAuth || (this.currentLang === 'ru' 
+                ? 'Пожалуйста, войдите в систему с номером телефона для подтверждения заказа' 
+                : 'กรุณาเข้าสู่ระบบด้วยเบอร์โทรศัพท์เพื่อยืนยันคำสั่งซื้อ'));
+            if (phoneAuth && phoneAuth.showPhoneModal) {
+                phoneAuth.showPhoneModal();
+            }
+            return;
+        }
+
         const t = translations[this.currentLang];
         const orderNumber = `${this.currentLang.toUpperCase()}${String(this.orderCounter).padStart(4, '0')}`;
         this.orderCounter++;
@@ -413,10 +451,283 @@ class FoodOrderSystem {
     }
 }
 
-// Initialize the order system
+/**
+ * Phone Authentication System
+ * Handles SMS verification for customer authentication
+ */
+class PhoneAuthSystem {
+    constructor() {
+        this.SMS_API_URL = 'http://localhost:3000';
+        this.userPhone = localStorage.getItem('userPhone') || null;
+        this.isVerified = localStorage.getItem('isVerified') === 'true';
+        this.init();
+    }
+
+    init() {
+        this.updateAuthUI();
+    }
+
+    /**
+     * Update authentication UI based on login status
+     */
+    updateAuthUI() {
+        const authSection = document.querySelector('.auth-section');
+        if (!authSection) return;
+
+        if (this.isVerified && this.userPhone) {
+            // User is logged in - show user info
+            authSection.innerHTML = `
+                <div class="user-info">
+                    <span class="user-phone">📱 ${this.escapeHtml(this.userPhone)}</span>
+                    <button class="logout-btn" onclick="phoneAuth.logout()">
+                        <span data-i18n="logoutBtn">ออกจากระบบ</span>
+                    </button>
+                </div>
+            `;
+        } else {
+            // User is not logged in - show login button
+            authSection.innerHTML = `
+                <button class="login-btn" onclick="phoneAuth.showPhoneModal()">
+                    <span data-i18n="loginBtn">เข้าสู่ระบบด้วยเบอร์โทร</span>
+                </button>
+            `;
+        }
+
+        // Re-apply translations after updating UI
+        if (orderSystem) {
+            orderSystem.applyTranslations();
+        }
+    }
+
+    /**
+     * Show phone number input modal
+     */
+    showPhoneModal() {
+        const modal = document.getElementById('phoneModal');
+        if (modal) {
+            modal.style.display = 'flex';
+            // Clear previous input
+            const phoneInput = document.getElementById('phoneInput');
+            if (phoneInput) phoneInput.value = '';
+        }
+    }
+
+    /**
+     * Hide phone number input modal
+     */
+    hidePhoneModal() {
+        const modal = document.getElementById('phoneModal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    }
+
+    /**
+     * Show verification code modal
+     */
+    showCodeModal() {
+        const modal = document.getElementById('codeModal');
+        if (modal) {
+            modal.style.display = 'flex';
+            // Clear previous input
+            const codeInput = document.getElementById('codeInput');
+            if (codeInput) codeInput.value = '';
+        }
+    }
+
+    /**
+     * Hide verification code modal
+     */
+    hideCodeModal() {
+        const modal = document.getElementById('codeModal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    }
+
+    /**
+     * Send verification code to phone number
+     */
+    async sendVerificationCode() {
+        const phoneInput = document.getElementById('phoneInput');
+        const phoneNumber = phoneInput.value.trim();
+        const errorEl = document.getElementById('phoneError');
+
+        if (!phoneNumber) {
+            errorEl.textContent = orderSystem.currentLang === 'ru' 
+                ? 'Введите номер телефона' 
+                : 'กรุณากรอกเบอร์โทรศัพท์';
+            return;
+        }
+
+        // Validate phone number format
+        const phoneRegex = /^\+?[1-9]\d{1,14}$/;
+        if (!phoneRegex.test(phoneNumber)) {
+            errorEl.textContent = orderSystem.currentLang === 'ru' 
+                ? 'Неверный формат номера (например: +972501234567)' 
+                : 'รูปแบบเบอร์โทรไม่ถูกต้อง (เช่น: +972501234567)';
+            return;
+        }
+
+        // Show loading state
+        const submitBtn = document.querySelector('#phoneModal .submit-btn');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = orderSystem.currentLang === 'ru' ? 'Отправка...' : 'กำลังส่ง...';
+
+        try {
+            const response = await fetch(`${this.SMS_API_URL}/api/send-verification-code`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ phoneNumber })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                // Save phone number temporarily
+                this.userPhone = phoneNumber;
+                
+                // Hide phone modal and show code modal
+                this.hidePhoneModal();
+                this.showCodeModal();
+                
+                // Clear error
+                errorEl.textContent = '';
+            } else {
+                errorEl.textContent = data.error || (orderSystem.currentLang === 'ru' 
+                    ? 'Не удалось отправить код' 
+                    : 'ไม่สามารถส่งรหัสได้');
+            }
+        } catch (error) {
+            console.error('Error sending verification code:', error);
+            errorEl.textContent = orderSystem.currentLang === 'ru' 
+                ? 'Ошибка подключения к серверу' 
+                : 'เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์';
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        }
+    }
+
+    /**
+     * Verify the code entered by user
+     */
+    async verifyCode() {
+        const codeInput = document.getElementById('codeInput');
+        const code = codeInput.value.trim();
+        const errorEl = document.getElementById('codeError');
+
+        if (!code || code.length !== 4) {
+            errorEl.textContent = orderSystem.currentLang === 'ru' 
+                ? 'Введите 4-значный код' 
+                : 'กรุณากรอกรหัส 4 หลัก';
+            return;
+        }
+
+        // Show loading state
+        const submitBtn = document.querySelector('#codeModal .submit-btn');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = orderSystem.currentLang === 'ru' ? 'Проверка...' : 'กำลังตรวจสอบ...';
+
+        try {
+            const response = await fetch(`${this.SMS_API_URL}/api/verify-code`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ 
+                    phoneNumber: this.userPhone,
+                    code: code 
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                // Save verified status
+                this.isVerified = true;
+                localStorage.setItem('userPhone', this.userPhone);
+                localStorage.setItem('isVerified', 'true');
+                
+                // Update UI
+                this.updateAuthUI();
+                
+                // Hide modal
+                this.hideCodeModal();
+                
+                // Show success message
+                alert(orderSystem.currentLang === 'ru' 
+                    ? '✅ Номер телефона успешно подтвержден!' 
+                    : '✅ ยืนยันเบอร์โทรศัพท์สำเร็จ!');
+            } else {
+                errorEl.textContent = data.error || (orderSystem.currentLang === 'ru' 
+                    ? 'Неверный код' 
+                    : 'รหัสไม่ถูกต้อง');
+                
+                if (data.attemptsLeft !== undefined) {
+                    errorEl.textContent += ` (${orderSystem.currentLang === 'ru' 
+                        ? `Осталось попыток: ${data.attemptsLeft}` 
+                        : `เหลือความพยายาม: ${data.attemptsLeft}`})`;
+                }
+            }
+        } catch (error) {
+            console.error('Error verifying code:', error);
+            errorEl.textContent = orderSystem.currentLang === 'ru' 
+                ? 'Ошибка подключения к серверу' 
+                : 'เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์';
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        }
+    }
+
+    /**
+     * Logout - clear authentication
+     */
+    logout() {
+        this.userPhone = null;
+        this.isVerified = false;
+        localStorage.removeItem('userPhone');
+        localStorage.removeItem('isVerified');
+        this.updateAuthUI();
+        
+        alert(orderSystem.currentLang === 'ru' 
+            ? 'Вы вышли из системы' 
+            : 'ออกจากระบบแล้ว');
+    }
+
+    /**
+     * Check if user is authenticated
+     */
+    isAuthenticated() {
+        return this.isVerified && this.userPhone !== null;
+    }
+
+    /**
+     * Escape HTML to prevent XSS
+     */
+    escapeHtml(text) {
+        const map = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        };
+        return text.replace(/[&<>"']/g, m => map[m]);
+    }
+}
+
+// Initialize the systems
 let orderSystem;
+let phoneAuth;
 document.addEventListener('DOMContentLoaded', () => {
     orderSystem = new FoodOrderSystem();
+    phoneAuth = new PhoneAuthSystem();
 });
 
 // Legacy function wrappers for backward compatibility
