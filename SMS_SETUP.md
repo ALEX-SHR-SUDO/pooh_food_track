@@ -14,15 +14,20 @@ Complete guide for setting up SMS authentication using Cudy LT500 4G LTE router.
 ## Hardware Requirements
 
 ### Required Equipment
-- **Cudy LT500 4G LTE Router** (or compatible OpenWRT router)
+- **Cudy LT500 4G LTE Router** (or compatible OpenWRT router with ZeroTier support)
 - **SIM Card** with SMS capabilities and active credit
-- **Internet Connection** for router configuration
-- **Server/VPS** (for production deployment)
+- **Internet Connection** for router configuration (4G or Ethernet)
+
+### For Production (Render.com deployment)
+- **ZeroTier Account** (free at https://my.zerotier.com/)
+- **Render.com Account** (free tier available, ~$7/month for production)
+- **GitHub Account** for code deployment
 
 ### Network Configuration
 - Router should be accessible on local network
 - Default router IP: `192.168.10.1`
 - Ensure good mobile signal strength for reliable SMS delivery
+- **ZeroTier Slave mode** supported on Cudy LT500 (no additional software needed)
 
 ## Router Setup
 
@@ -307,6 +312,88 @@ Access to fetch at 'http://localhost:3000' blocked by CORS policy
 4. Use proxy in development
 
 ## Production Deployment
+
+### Overview
+
+For production deployment, we use **ZeroTier VPN** to connect Render.com to your local Cudy LT500 router **without needing a VPS server**.
+
+**Architecture:**
+```
+Render.com Backend → Render.com ZeroTier Gateway (Docker) → ZeroTier Cloud → Cudy LT500 Router
+```
+
+**Benefits:**
+- ✅ **No VPS needed** - saves $5-20/month
+- ✅ **100% Free VPN** - ZeroTier Free tier
+- ✅ **Secure** - End-to-end encryption
+- ✅ **Simple** - 10-15 minute setup
+- ✅ **Automatic deployment** - via render.yaml
+
+### Quick Start
+
+1. **Setup ZeroTier Network**
+   - Create account at https://my.zerotier.com/
+   - Create new network and note the Network ID
+   
+2. **Configure Router**
+   - Enable ZeroTier Slave mode on Cudy LT500
+   - Join the ZeroTier network
+   - Authorize router on my.zerotier.com
+
+3. **Deploy to Render.com**
+   - Push code to GitHub
+   - Connect repository to Render
+   - Configure environment variables:
+     - `ZEROTIER_NETWORK_ID` - your network ID
+     - `ROUTER_ZEROTIER_IP` - router's ZeroTier IP
+     - `ROUTER_USER` and `ROUTER_PASS` - router credentials
+   
+4. **Authorize Gateway**
+   - Wait for deployment
+   - Authorize the gateway on my.zerotier.com
+
+5. **Test**
+   - Visit: `https://your-backend.onrender.com/api/health`
+   - Should show `"connected": true`
+
+### Full Setup Guide
+
+📚 **Complete step-by-step instructions (in Russian):** [ZEROTIER_SETUP.md](ZEROTIER_SETUP.md)
+
+The guide includes:
+- Detailed ZeroTier network setup
+- Router configuration with screenshots
+- Render.com deployment steps
+- Environment variables configuration
+- Testing and verification
+- Comprehensive troubleshooting
+- Alternative VPN solutions
+
+### Environment Variables for Production
+
+For Render.com, set these environment variables:
+
+**ZeroTier Gateway Service:**
+```env
+ZEROTIER_NETWORK_ID=your_network_id_here
+ROUTER_ZEROTIER_IP=192.168.192.1
+PORT=10000
+```
+
+**Backend Service:**
+```env
+NODE_VERSION=25.6.0
+PORT=10000
+ROUTER_IP=pooh-zerotier-gateway.onrender.com
+ROUTER_PROTOCOL=http
+ROUTER_USER=admin
+ROUTER_PASS=your_router_password
+NODE_ENV=production
+```
+
+### Alternative: Traditional VPS Setup
+
+If you prefer to use a VPS instead of ZeroTier, here's the traditional approach:
 
 ### 1. VPS Setup
 

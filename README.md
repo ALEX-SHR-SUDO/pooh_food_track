@@ -81,15 +81,45 @@ cp .env.example .env
 npm start
 ```
 
+## 🔐 VPN Setup для Production
+
+Для подключения к роутеру LT500 из облака используется **ZeroTier VPN** решение:
+
+- ✅ **БЕЗ VPS** - не нужен отдельный сервер
+- ✅ **100% Бесплатно** - ZeroTier Free tier (до 100 устройств)
+- ✅ **Безопасно** - End-to-end шифрование AES-256
+- ✅ **Автоматический деплой** - через render.yaml
+- ✅ **Простая настройка** - 10-15 минут
+
+### Архитектура
+```
+Render.com (Backend) → Render.com (ZeroTier Gateway Docker) 
+                    → ZeroTier Cloud 
+                    → Cudy LT500 Router (ZeroTier Slave)
+```
+
+📚 **Подробная инструкция на русском языке:** [ZEROTIER_SETUP.md](ZEROTIER_SETUP.md)
+
+**Быстрый старт**:
+1. Создайте ZeroTier сеть на https://my.zerotier.com/
+2. Включите ZeroTier Slave на роутере LT500
+3. Настройте Environment Variables в Render.com
+4. Deploy - готово!
+
+Полная инструкция с скриншотами и troubleshooting в [ZEROTIER_SETUP.md](ZEROTIER_SETUP.md)
+
 ## 🚀 เทคโนโลยีที่ใช้
 - HTML5 (Semantic markup with SEO optimization)
 - CSS3 (Gradient, Flexbox, Grid, Animations, Thai-inspired design)
 - JavaScript (ES6+ with OOP patterns)
 - Node.js + Express (Backend SMS server)
 - Cudy LT500 4G LTE Router (SMS Gateway)
+- **ZeroTier VPN** (Secure cloud-to-router connection)
+- **Docker** (ZeroTier Gateway containerization)
 - Professional code structure (separated files)
 - Responsive Design
 - Vercel deployment ready
+- Render.com deployment ready
 
 ## 📁 โครงสร้างโปรเจค
 ```
@@ -103,13 +133,19 @@ pooh_food_track/
 │   ├── package.json           # Backend dependencies
 │   ├── .env.example           # Environment template
 │   └── README.md              # Backend documentation
+├── scripts/            # Utility scripts
+│   └── test-zerotier-connection.sh  # ZeroTier diagnostic tool
 ├── image/              # Image directory
 │   ├── meat1.png       # Header image
 │   └── ...
-├── vercel.json         # Vercel deployment configuration
-├── README.md           # Project documentation
-├── SMS_SETUP.md        # SMS authentication setup guide
-└── DEPLOYMENT.md       # Vercel deployment guide
+├── Dockerfile.zerotier        # ZeroTier Gateway Docker image
+├── zerotier-entrypoint.sh     # ZeroTier startup script
+├── render.yaml                # Render.com deployment config
+├── vercel.json                # Vercel deployment configuration
+├── README.md                  # Project documentation
+├── SMS_SETUP.md              # SMS authentication setup guide
+├── ZEROTIER_SETUP.md         # ZeroTier VPN setup guide (Russian)
+└── DEPLOYMENT.md             # Vercel deployment guide
 ```
 
 ## 🎨 Thai Cultural Design Elements
