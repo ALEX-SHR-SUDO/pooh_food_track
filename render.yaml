@@ -1,5 +1,7 @@
 services:
   # Backend SMS Server
+  # Note: Using explicit 'cd backend &&' instead of rootDir due to Render platform issues
+  # with rootDir not being respected during build phase
   - type: web
     name: pooh-food-sms-backend
     env: node
