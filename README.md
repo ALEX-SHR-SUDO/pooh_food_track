@@ -81,6 +81,38 @@ cp .env.example .env
 npm start
 ```
 
+## 🌐 Production Deployment with VPN
+
+แอปพลิเคชันใช้ **ZeroTier VPN** เพื่อเชื่อมต่อ Render.com กับ Cudy LT500 router ในเครือข่ายท้องถิ่น โดยไม่ต้องใช้ VPS server
+
+**ข้อดี:**
+- ✅ 100% ฟรี (ZeroTier free tier รองรับถึง 100 อุปกรณ์)
+- ✅ ไม่ต้องการ VPS server
+- ✅ การเชื่อมต่อที่ปลอดภัยด้วยการเข้ารหัส
+- ✅ ตั้งค่าง่าย (~15 นาที)
+- ✅ ค่าใช้จ่ายเพียง $7/เดือน (เฉพาะ Render.com)
+
+**สถาปัตยกรรม:**
+```
+Render.com (Backend + ZeroTier Gateway) 
+    ↕ Encrypted VPN (ZeroTier Network)
+Cudy LT500 Router (ที่บ้าน)
+    ↓ 4G/LTE
+📱 SMS Delivery
+```
+
+**คู่มือการติดตั้ง:**
+ดูคู่มือฉบับสมบูรณ์ที่ [ZEROTIER_SETUP.md](ZEROTIER_SETUP.md) (เอกสารภาษารัสเซีย)
+
+**ความแตกต่างจากทางเลือกอื่น:**
+
+| Solution | Cost/Month | Setup Time | Recommended |
+|----------|------------|------------|-------------|
+| **ZeroTier** | **$0** | **15 min** | ✅ **Yes** |
+| VPS | $5-10 | 1-2 hours | ⚠️ If needed |
+| CloudFlare Tunnel | $0 | 30 min | ⚠️ HTTP only |
+| ngrok | $8+ | 10 min | ❌ Not for prod |
+
 ## 🚀 เทคโนโลยีที่ใช้
 - HTML5 (Semantic markup with SEO optimization)
 - CSS3 (Gradient, Flexbox, Grid, Animations, Thai-inspired design)

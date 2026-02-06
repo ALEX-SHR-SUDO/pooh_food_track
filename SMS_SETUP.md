@@ -308,7 +308,42 @@ Access to fetch at 'http://localhost:3000' blocked by CORS policy
 
 ## Production Deployment
 
-### 1. VPS Setup
+### Option 1: ZeroTier VPN (Recommended - No VPS Required)
+
+**Use ZeroTier to connect Render.com directly to your local router without a VPS server.**
+
+**Benefits:**
+- ✅ **100% FREE** (ZeroTier free tier)
+- ✅ **No VPS needed**
+- ✅ **Secure encrypted connection**
+- ✅ **Simple 15-minute setup**
+- ✅ **Cost: Only $7/month (Render.com)**
+
+**Complete Setup Guide:** See [ZEROTIER_SETUP.md](ZEROTIER_SETUP.md) (Comprehensive Russian documentation)
+
+**Architecture:**
+```
+Render.com (Node.js Backend + ZeroTier Gateway in Docker)
+    ↕ Encrypted VPN Connection (ZeroTier Network)
+Cudy LT500 Router at Home (ZeroTier Slave Mode)
+    ↓ 4G/LTE
+📱 SMS Delivery
+```
+
+**Quick Summary:**
+1. Create ZeroTier network at https://my.zerotier.com
+2. Configure router to join ZeroTier network (VPN → ZeroTier Slave)
+3. Deploy to Render.com (uses `render.yaml` with ZeroTier gateway)
+4. Set environment variables in Render Dashboard
+5. Done! Backend can now access router via VPN
+
+**Total Cost:** $7/month (Render.com only, no VPS needed)
+
+---
+
+### Option 2: Traditional VPS Setup (If you prefer VPS)
+
+If you need more control or already have a VPS, follow this traditional setup.
 
 **Recommended Specs:**
 - OS: Ubuntu 20.04 LTS or later
@@ -316,7 +351,7 @@ Access to fetch at 'http://localhost:3000' blocked by CORS policy
 - Storage: 10GB minimum
 - CPU: 1 core minimum
 
-### 2. Install Dependencies
+#### 2. Install Dependencies
 
 ```bash
 # Update system
@@ -336,7 +371,7 @@ sudo apt install -y nginx
 sudo apt install -y certbot python3-certbot-nginx
 ```
 
-### 3. Deploy Backend
+#### 3. Deploy Backend
 
 ```bash
 # Clone repository
@@ -358,7 +393,7 @@ pm2 startup
 pm2 save
 ```
 
-### 4. Configure Nginx
+#### 4. Configure Nginx
 
 Create Nginx configuration:
 ```bash
@@ -391,7 +426,7 @@ sudo nginx -t
 sudo systemctl reload nginx
 ```
 
-### 5. Setup SSL Certificate
+#### 5. Setup SSL Certificate
 
 ```bash
 # Get SSL certificate
@@ -401,14 +436,14 @@ sudo certbot --nginx -d your-domain.com
 sudo certbot renew --dry-run
 ```
 
-### 6. Update Frontend
+#### 6. Update Frontend
 
 Update `script.js` with production API URL:
 ```javascript
 this.SMS_API_URL = 'https://your-domain.com/api';
 ```
 
-### 7. Monitoring
+#### 7. Monitoring
 
 **Check backend status:**
 ```bash
@@ -426,7 +461,7 @@ pm2 logs pooh-sms --lines 100
 pm2 monit
 ```
 
-### 8. Security Hardening
+#### 8. Security Hardening
 
 1. **Firewall:**
 ```bash
