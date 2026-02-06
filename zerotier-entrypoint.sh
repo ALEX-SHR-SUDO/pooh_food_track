@@ -72,9 +72,11 @@ echo "🔄 Starting HTTP proxy to router..."
 echo "   Listening on: 0.0.0.0:10000"
 echo "   Forwarding to: $ROUTER_ZEROTIER_IP:80"
 
-# Создание простого health check endpoint
-(while true; do 
-    echo -e "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: 2\r\n\r\nOK" | nc -l -p 8080 -q 1
+# Запуск простого health check endpoint в фоне
+# Обслуживает /health на порту 10000 (не блокирует)
+(while true; do
+    response="HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: 2\r\n\r\nOK"
+    echo -e "$response" | nc -l -p 8080
 done) &
 
 # Запуск socat прокси (блокирующий вызов)

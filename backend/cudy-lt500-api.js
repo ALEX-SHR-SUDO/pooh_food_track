@@ -154,26 +154,37 @@ class CudyLT500_API {
         try {
             console.log(`🔍 Checking router connection: ${this.baseUrl}`);
             
-            const response = await fetch(`${this.baseUrl}/cgi-bin/luci`, {
-                method: 'GET',
-                timeout: 10000
-            });
+            // Create abort controller for timeout
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000);
             
-            const isConnected = response.ok || response.status === 401;
-            
-            if (isConnected) {
-                console.log('✅ Router is reachable');
-            } else {
-                console.log(`⚠️  Router responded with status: ${response.status}`);
+            try {
+                const response = await fetch(`${this.baseUrl}/cgi-bin/luci`, {
+                    method: 'GET',
+                    signal: controller.signal
+                });
+                
+                clearTimeout(timeoutId);
+                
+                const isConnected = response.ok || response.status === 401;
+                
+                if (isConnected) {
+                    console.log('✅ Router is reachable');
+                } else {
+                    console.log(`⚠️  Router responded with status: ${response.status}`);
+                }
+                
+                return isConnected;
+            } catch (fetchError) {
+                clearTimeout(timeoutId);
+                throw fetchError;
             }
-            
-            return isConnected;
         } catch (error) {
             console.error('❌ Router connection failed:');
             console.error(`   Error: ${error.message}`);
             console.error(`   URL: ${this.baseUrl}/cgi-bin/luci`);
             
-            if (error.code === 'ETIMEDOUT' || error.code === 'ECONNREFUSED') {
+            if (error.name === 'AbortError' || error.code === 'ETIMEDOUT' || error.code === 'ECONNREFUSED') {
                 console.error('');
                 console.error('💡 Troubleshooting tips:');
                 console.error('   1. Check if ROUTER_IP environment variable is correct');
