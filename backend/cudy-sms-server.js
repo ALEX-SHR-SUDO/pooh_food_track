@@ -17,11 +17,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Initialize Cudy Router API
+const routerProtocol = process.env.ROUTER_PROTOCOL || 'http';
 const routerApi = new CudyLT500_API(
     process.env.ROUTER_IP || '192.168.10.1',
     process.env.ROUTER_USER || 'admin',
-    process.env.ROUTER_PASS || 'admin'
+    process.env.ROUTER_PASS || 'admin',
+    routerProtocol
 );
+
+// Environment info
+const isProduction = process.env.NODE_ENV === 'production' || process.env.RENDER === 'true';
+console.log(`\n🌍 Environment: ${isProduction ? 'PRODUCTION' : 'DEVELOPMENT'}`);
+console.log(`📡 Router IP: ${process.env.ROUTER_IP || '192.168.10.1'}`);
+console.log(`🔒 Protocol: ${routerProtocol}\n`);
 
 // In-memory storage for verification codes
 // In production, use Redis or a database
@@ -283,6 +291,38 @@ app.get('/', (req, res) => {
         version: '1.0.0',
         status: 'running'
     });
+});
+
+/**
+ * GET /health
+ * Health check endpoint for Render.com
+ */
+app.get('/health', (req, res) => {
+    res.json({ 
+        status: 'ok',
+        service: 'pooh-food-sms-backend',
+        timestamp: new Date().toISOString()
+    });
+});
+
+/**
+ * GET /api/router-status
+ * Check router connectivity status
+ */
+app.get('/api/router-status', async (req, res) => {
+    try {
+        const isConnected = await routerApi.checkConnection();
+        res.json({
+            status: isConnected ? 'connected' : 'disconnected',
+            routerIp: process.env.ROUTER_IP || '192.168.10.1',
+            timestamp: new Date().toISOString()
+        });
+    } catch (error) {
+        res.status(500).json({
+            status: 'error',
+            error: error.message
+        });
+    }
 });
 
 // Error handling middleware

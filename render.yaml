@@ -1,4 +1,18 @@
 services:
+  # ZeroTier Gateway Service
+  - type: web
+    name: pooh-zerotier-gateway
+    env: docker
+    dockerfilePath: ./Dockerfile.zerotier
+    healthCheckPath: /health
+    envVars:
+      - key: ZEROTIER_NETWORK_ID
+        sync: false  # User must set this manually
+      - key: ROUTER_ZEROTIER_IP
+        sync: false  # User must set this manually
+      - key: PORT
+        value: 10000
+
   # Backend SMS Server
   # Note: Using explicit 'cd backend &&' instead of rootDir due to Render platform issues
   # with rootDir not being respected during build phase
@@ -11,10 +25,12 @@ services:
       - key: NODE_VERSION
         value: 25.6.0
       - key: PORT
-        generateValue: true
+        value: 10000
       - key: ROUTER_IP
-        sync: false
+        value: http://pooh-zerotier-gateway:10000  # Internal Render network
       - key: ROUTER_USER
         sync: false
       - key: ROUTER_PASS
         sync: false
+      - key: ROUTER_PROTOCOL
+        value: http  # Gateway handles connection to router

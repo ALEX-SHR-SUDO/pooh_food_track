@@ -8,15 +8,25 @@ const { CookieJar } = require('tough-cookie');
 const fetchCookie = require('fetch-cookie');
 
 class CudyLT500_API {
-    constructor(routerIp, username, password) {
+    constructor(routerIp, username, password, protocol = 'http') {
         this.routerIp = routerIp;
         this.username = username;
         this.password = password;
-        this.baseUrl = `http://${routerIp}`;
+        this.protocol = protocol;
+        
+        // Support both direct IP and gateway URLs
+        if (routerIp.startsWith('http://') || routerIp.startsWith('https://')) {
+            this.baseUrl = routerIp;
+        } else {
+            this.baseUrl = `${protocol}://${routerIp}`;
+        }
+        
         this.cookieJar = new CookieJar();
         this.fetch = fetchCookie(fetch, this.cookieJar);
         this.isAuthenticated = false;
         this.sysauthCookie = null;
+        
+        console.log(`📡 Router API initialized: ${this.baseUrl}`);
     }
 
     /**
@@ -137,18 +147,41 @@ class CudyLT500_API {
     }
 
     /**
-     * Check router connectivity
+     * Check router connectivity with better error messages
      * @returns {Promise<boolean>} Connection status
      */
     async checkConnection() {
         try {
+            console.log(`🔍 Checking router connection: ${this.baseUrl}`);
+            
             const response = await fetch(`${this.baseUrl}/cgi-bin/luci`, {
                 method: 'GET',
-                timeout: 5000
+                timeout: 10000
             });
-            return response.ok || response.status === 401; // 401 means router is reachable but needs auth
+            
+            const isConnected = response.ok || response.status === 401;
+            
+            if (isConnected) {
+                console.log('✅ Router is reachable');
+            } else {
+                console.log(`⚠️  Router responded with status: ${response.status}`);
+            }
+            
+            return isConnected;
         } catch (error) {
-            console.error('✗ Router connection check failed:', error.message);
+            console.error('❌ Router connection failed:');
+            console.error(`   Error: ${error.message}`);
+            console.error(`   URL: ${this.baseUrl}/cgi-bin/luci`);
+            
+            if (error.code === 'ETIMEDOUT' || error.code === 'ECONNREFUSED') {
+                console.error('');
+                console.error('💡 Troubleshooting tips:');
+                console.error('   1. Check if ROUTER_IP environment variable is correct');
+                console.error('   2. For local dev: use direct IP (192.168.10.1)');
+                console.error('   3. For production: check ZeroTier gateway is running');
+                console.error('   4. Verify router is authorized on my.zerotier.com');
+            }
+            
             return false;
         }
     }
