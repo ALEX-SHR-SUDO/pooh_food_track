@@ -17,6 +17,7 @@
 - 🏛️ **การออกแบบแบบมืออาชีพด้วยองค์ประกอบวัฒนธรรมไทย**
 - ✨ **เอฟเฟกต์การโต้ตอบที่ลื่นไหลและทันสมัย**
 - 💾 **จัดเก็บข้อมูลด้วย localStorage - ไม่ต้องการ Backend**
+- 🔐 **SMS Authentication - ยืนยันตัวตนผ่าน SMS ด้วย Cudy LT500 Router**
 
 ## เมนูอาหาร
 
@@ -38,18 +39,54 @@
 
 ## วิธีการใช้งาน
 
+### Frontend (สำหรับลูกค้า)
 1. เปิดไฟล์ `index.html` ในเว็บเบราว์เซอร์
 2. เลือกภาษาที่ต้องการ (ไทย/รัสเซีย) จากปุ่มด้านบน
-3. เลือกเมนูอาหารที่ต้องการโดยกดปุ่ม "🌿"
-4. ปรับจำนวนอาหารในตะกร้าด้วยปุ่ม + และ -
-5. ตรวจสอบยอดรวมทั้งหมด
-6. กดปุ่ม "ยืนยันคำสั่งซื้อ" เพื่อทำการสั่งอาหาร
-7. รับหมายเลขคำสั่งซื้อและรอรับอาหาร
+3. คลิก "เข้าสู่ระบบด้วยเบอร์โทร" เพื่อยืนยันตัวตนผ่าน SMS
+4. กรอกเบอร์โทรศัพท์และรับรหัสยืนยัน 4 หลัก
+5. เลือกเมนูอาหารที่ต้องการโดยกดปุ่ม "🛒"
+6. ปรับจำนวนอาหารในตะกร้าด้วยปุ่ม + และ -
+7. ตรวจสอบยอดรวมทั้งหมด
+8. กดปุ่ม "ยืนยันคำสั่งซื้อ" เพื่อทำการสั่งอาหาร
+9. รับหมายเลขคำสั่งซื้อและรอรับอาหาร
+
+### Backend SMS Server (สำหรับผู้ดูแลระบบ)
+1. ติดตั้ง Node.js และ dependencies
+2. ตั้งค่า Cudy LT500 Router และใส่ SIM Card
+3. กำหนดค่าใน `.env` file
+4. รัน backend server: `cd backend && npm start`
+5. ดูรายละเอียดใน [SMS_SETUP.md](SMS_SETUP.md)
+
+## 📱 SMS Authentication
+
+ระบบยืนยันตัวตนผ่าน SMS โดยใช้ Cudy LT500 4G LTE Router
+
+**คุณสมบัติ:**
+- ส่งรหัสยืนยัน 4 หลักผ่าน SMS
+- รหัสมีอายุ 5 นาที
+- จำกัดความพยายาม 3 ครั้ง
+- Rate limiting ป้องกันการส่งซ้ำ
+- เก็บ session ใน localStorage
+
+**การติดตั้ง:**
+ดูคู่มือฉบับเต็มที่ [SMS_SETUP.md](SMS_SETUP.md)
+
+**Quick Start:**
+```bash
+# ติดตั้ง backend
+cd backend
+npm install
+cp .env.example .env
+# แก้ไข .env ตามการตั้งค่า router
+npm start
+```
 
 ## 🚀 เทคโนโลยีที่ใช้
 - HTML5 (Semantic markup with SEO optimization)
 - CSS3 (Gradient, Flexbox, Grid, Animations, Thai-inspired design)
 - JavaScript (ES6+ with OOP patterns)
+- Node.js + Express (Backend SMS server)
+- Cudy LT500 4G LTE Router (SMS Gateway)
 - Professional code structure (separated files)
 - Responsive Design
 - Vercel deployment ready
@@ -60,11 +97,18 @@ pooh_food_track/
 ├── index.html          # Main HTML file - หน้าหลักสำหรับลูกค้า
 ├── styles.css          # Professional CSS with Thai theme
 ├── script.js           # JavaScript with OOP structure - ระบบหลัก
+├── backend/            # SMS Backend Server
+│   ├── cudy-lt500-api.js      # Cudy Router API client
+│   ├── cudy-sms-server.js     # Express SMS server
+│   ├── package.json           # Backend dependencies
+│   ├── .env.example           # Environment template
+│   └── README.md              # Backend documentation
 ├── image/              # Image directory
 │   ├── meat1.png       # Header image
 │   └── ...
 ├── vercel.json         # Vercel deployment configuration
 ├── README.md           # Project documentation
+├── SMS_SETUP.md        # SMS authentication setup guide
 └── DEPLOYMENT.md       # Vercel deployment guide
 ```
 
