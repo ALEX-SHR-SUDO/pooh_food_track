@@ -1,0 +1,13 @@
+FROM alpine:latest
+
+# Install ZeroTier and socat for proxying
+RUN apk add --no-cache zerotier-one socat curl
+
+# Copy entrypoint script
+COPY zerotier-entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Expose port for HTTP proxy
+EXPOSE 10000
+
+ENTRYPOINT ["/entrypoint.sh"]

@@ -8,15 +8,18 @@ const { CookieJar } = require('tough-cookie');
 const fetchCookie = require('fetch-cookie');
 
 class CudyLT500_API {
-    constructor(routerIp, username, password) {
+    constructor(routerIp, username, password, protocol = 'http') {
         this.routerIp = routerIp;
         this.username = username;
         this.password = password;
-        this.baseUrl = `http://${routerIp}`;
+        this.protocol = protocol;
+        this.baseUrl = `${protocol}://${routerIp}`;
         this.cookieJar = new CookieJar();
         this.fetch = fetchCookie(fetch, this.cookieJar);
         this.isAuthenticated = false;
         this.sysauthCookie = null;
+        
+        console.log(`📡 Router API initialized: ${this.baseUrl}`);
     }
 
     /**
@@ -142,13 +145,29 @@ class CudyLT500_API {
      */
     async checkConnection() {
         try {
-            const response = await fetch(`${this.baseUrl}/cgi-bin/luci`, {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 5000);
+            
+            const fetchOptions = {
                 method: 'GET',
-                timeout: 5000
-            });
+                signal: controller.signal
+            };
+            
+            // Disable SSL verification for self-signed certificates if HTTPS
+            if (this.protocol === 'https') {
+                const https = require('https');
+                fetchOptions.agent = new https.Agent({ rejectUnauthorized: false });
+            }
+            
+            const response = await fetch(`${this.baseUrl}/cgi-bin/luci`, fetchOptions);
+            
+            clearTimeout(timeoutId);
             return response.ok || response.status === 401; // 401 means router is reachable but needs auth
         } catch (error) {
-            console.error('✗ Router connection check failed:', error.message);
+            console.error(`✗ Router connection check failed: ${error.message}`);
+            if (error.name === 'AbortError') {
+                console.error(`  Connection timeout. Check if router is accessible at: ${this.baseUrl}/cgi-bin/luci`);
+            }
             return false;
         }
     }
