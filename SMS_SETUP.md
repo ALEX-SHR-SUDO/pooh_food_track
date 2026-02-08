@@ -20,9 +20,11 @@ Complete guide for setting up SMS authentication using Cudy LT500 4G LTE router.
 - **Server/VPS** (for production deployment)
 
 ### Network Configuration
-- Router should be accessible on local network
-- Default router IP: `192.168.10.1`
+- Router should be accessible on local network or via VPN
+- Default router IP: `192.168.10.1` (local network)
+- ZeroTier VPN IP: varies (e.g., `10.147.20.2`) - see [ZEROTIER_VPN_SETUP.md](ZEROTIER_VPN_SETUP.md)
 - Ensure good mobile signal strength for reliable SMS delivery
+- For remote deployment, ZeroTier VPN is recommended
 
 ## Router Setup
 
@@ -103,6 +105,8 @@ Edit `.env` file:
 ```env
 # Router Configuration
 ROUTER_IP=192.168.10.1        # Your router's IP address
+                               # For local network: 192.168.10.1
+                               # For ZeroTier VPN: use ZeroTier IP (e.g., 10.147.20.2)
 ROUTER_USER=admin              # Router admin username
 ROUTER_PASS=your_password      # Router admin password (change this!)
 
@@ -111,7 +115,11 @@ PORT=3000                      # Backend server port
 
 # Optional Settings
 DEBUG=false                    # Enable debug logging
+ROUTER_TIMEOUT=10000           # Connection timeout (ms) - increase for VPN
 ```
+
+**For ZeroTier VPN Setup:**
+See [ZEROTIER_VPN_SETUP.md](ZEROTIER_VPN_SETUP.md) for complete instructions on connecting to your router remotely via ZeroTier VPN.
 
 **Security Notes:**
 - Never commit `.env` file to git
@@ -258,11 +266,13 @@ curl -X POST http://localhost:3000/api/send-verification-code \
 ```
 
 **Solutions:**
-1. Verify router IP: `ping 192.168.10.1`
+1. Verify router IP: `ping 192.168.10.1` (or your ZeroTier IP)
 2. Check router is powered on
 3. Verify network connectivity
 4. Try accessing router web interface manually
 5. Check firewall settings
+6. **For ZeroTier VPN**: Verify ZeroTier connection with `sudo zerotier-cli listnetworks`
+7. **For ZeroTier VPN**: Ensure both devices are authorized in the ZeroTier dashboard
 
 ### Authentication Fails
 
@@ -307,6 +317,25 @@ Access to fetch at 'http://localhost:3000' blocked by CORS policy
 4. Use proxy in development
 
 ## Production Deployment
+
+### Remote Access Options
+
+**Option 1: ZeroTier VPN (Recommended)**
+- Secure encrypted connection to router from anywhere
+- Works behind NAT and firewalls
+- Easy setup and configuration
+- See [ZEROTIER_VPN_SETUP.md](ZEROTIER_VPN_SETUP.md) for complete guide
+
+**Option 2: Port Forwarding**
+- Requires static public IP
+- Must configure router firewall carefully
+- Less secure than VPN
+- Not recommended for production
+
+**Option 3: Local Network Only**
+- Backend must be on same LAN as router
+- Most secure but limited to local access
+- Good for development/testing
 
 ### 1. VPS Setup
 

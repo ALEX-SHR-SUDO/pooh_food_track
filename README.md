@@ -67,9 +67,11 @@
 - จำกัดความพยายาม 3 ครั้ง
 - Rate limiting ป้องกันการส่งซ้ำ
 - เก็บ session ใน localStorage
+- รองรับ ZeroTier VPN สำหรับการเชื่อมต่อระยะไกล
 
 **การติดตั้ง:**
-ดูคู่มือฉบับเต็มที่ [SMS_SETUP.md](SMS_SETUP.md)
+- **Local Network**: ดูคู่มือฉบับเต็มที่ [SMS_SETUP.md](SMS_SETUP.md)
+- **Remote via ZeroTier VPN**: ดูคู่มือที่ [ZEROTIER_VPN_SETUP.md](ZEROTIER_VPN_SETUP.md)
 
 **Quick Start:**
 ```bash
@@ -87,6 +89,7 @@ npm start
 - JavaScript (ES6+ with OOP patterns)
 - Node.js + Express (Backend SMS server)
 - Cudy LT500 4G LTE Router (SMS Gateway)
+- ZeroTier VPN (Optional - for remote router access)
 - Professional code structure (separated files)
 - Responsive Design
 - Vercel deployment ready
@@ -107,8 +110,9 @@ pooh_food_track/
 │   ├── meat1.png       # Header image
 │   └── ...
 ├── vercel.json         # Vercel deployment configuration
-├── README.md           # Project documentation
+├── README.md           # Project documentation (This file)
 ├── SMS_SETUP.md        # SMS authentication setup guide
+├── ZEROTIER_VPN_SETUP.md # ZeroTier VPN configuration guide
 └── DEPLOYMENT.md       # Vercel deployment guide
 ```
 
