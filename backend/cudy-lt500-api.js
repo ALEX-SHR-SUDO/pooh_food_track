@@ -149,7 +149,7 @@ class CudyLT500_API {
             return response.ok || response.status === 401; // 401 means router is reachable but needs auth
         } catch (error) {
             // Only log the error type, not the full URL to keep logs clean
-            const errorType = error.code || error.type || 'connection error';
+            const errorType = error?.code || error?.type || 'unknown-error';
             console.error(`✗ Router connection check failed: ${errorType}`);
             return false;
         }
