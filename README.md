@@ -1,12 +1,16 @@
 # ร้านอาหารไทยพื้นบ้าน - ระบบติดตามอาหาร 🍜
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ALEX-SHR-SUDO/pooh_food_track)
+[![ZeroTier VPN](https://img.shields.io/badge/ZeroTier-VPN_Enabled-blue)](ZEROTIER_VPN_SETUP.md)
+[![Cudy LT500](https://img.shields.io/badge/Cudy-LT500_Compatible-green)](SMS_SETUP.md)
 
 ## 🚀 Quick Start
 
 **New here?** Start with the [Getting Started Guide](GETTING_STARTED.md)
 
-**Using ZeroTier VPN?** See [Quick Start with ZeroTier](QUICKSTART_ZEROTIER.md)
+**Using ZeroTier VPN?** See [Quick Start with ZeroTier](QUICKSTART_ZEROTIER.md) (15 minutes)
+
+**Troubleshooting?** Check the [Troubleshooting Checklist](TROUBLESHOOTING.md)
 
 ## คำอธิบาย
 เว็บแอปพลิเคชันสำหรับร้านอาหารไทยพื้นบ้าน ที่ช่วยในการติดตามและสั่งอาหารออนไลน์ พัฒนาด้วย HTML, CSS และ JavaScript แบบมืออาชีพ พร้อมการออกแบบที่ใช้สีธงชาติไทย (แดง-ขาว-น้ำเงิน) และองค์ประกอบวัฒนธรรมไทยอย่างมีระดับ
