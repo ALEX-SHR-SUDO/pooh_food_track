@@ -4,8 +4,17 @@
 
 ### Prerequisites
 - GitHub account connected to Render
-- Cudy LT500 Router accessible from the internet (with port forwarding configured)
+- Cudy LT500 Router with SMS capabilities
+- **Network Access**: Choose one of the following:
+  - **Option A (Recommended)**: ZeroTier VPN - Router and backend on same ZeroTier network
+  - **Option B**: Port forwarding - Router accessible from the internet
+  - **Option C**: Local only - Backend and router on same LAN (not suitable for cloud deployment)
 - Router credentials
+
+**For ZeroTier VPN Setup (Recommended):**
+1. Complete [ZEROTIER_VPN_SETUP.md](ZEROTIER_VPN_SETUP.md) guide first
+2. Note your router's ZeroTier IP address (e.g., `10.147.20.2`)
+3. Have your ZeroTier Network ID ready
 
 ### Method 1: Auto-Deploy with render.yaml
 
@@ -27,13 +36,74 @@
    - **Build Command**: `npm install`
    - **Start Command**: `npm start`
 5. Add Environment Variables:
-   - `ROUTER_IP`: Your Cudy router's public IP or domain
-   - `ROUTER_USER`: Router admin username (default: admin)
-   - `ROUTER_PASS`: Router admin password
+   - `ROUTER_IP`: 
+     - For ZeroTier: Your router's ZeroTier IP (e.g., `10.147.20.2`)
+     - For port forwarding: Router's public IP or domain
+     - For local: `192.168.10.1` (won't work with cloud deployment)
+   - `ROUTER_USER`: Router admin username (default: `admin`)
+   - `ROUTER_PASS`: Router admin password (change from default!)
+   - `ROUTER_TIMEOUT`: `10000` (recommended for VPN connections)
    - `PORT`: Auto-assigned by Render
 6. Click "Create Web Service"
 
 ### After Deployment
+
+#### For ZeroTier VPN Setup (Recommended)
+
+1. **Install ZeroTier on Render**
+   
+   Add a build command to install ZeroTier:
+   ```bash
+   # In Render dashboard, update Build Command to:
+   curl -s https://install.zerotier.com | bash && cd backend && npm install
+   ```
+
+2. **Join ZeroTier Network**
+   
+   Add to Start Command:
+   ```bash
+   # In Render dashboard, update Start Command to:
+   zerotier-cli join YOUR_NETWORK_ID && cd backend && npm start
+   ```
+   
+   Or use a startup script (recommended):
+   
+   Create `backend/start.sh`:
+   ```bash
+   #!/bin/bash
+   # Install ZeroTier if not present
+   if ! command -v zerotier-cli &> /dev/null; then
+       curl -s https://install.zerotier.com | bash
+   fi
+   
+   # Join ZeroTier network
+   zerotier-cli join YOUR_NETWORK_ID
+   
+   # Wait for connection
+   sleep 5
+   
+   # Start backend
+   node cudy-sms-server.js
+   ```
+   
+   Update Start Command: `bash backend/start.sh`
+
+3. **Authorize in ZeroTier Dashboard**
+   - Go to https://my.zerotier.com
+   - Select your network
+   - Look for new member (Render instance)
+   - Check "Auth" to authorize
+   - Note the assigned IP
+
+4. **Update Environment Variables**
+   - Set `ROUTER_IP` to your router's ZeroTier IP
+   - Verify `ROUTER_TIMEOUT` is set to `10000` or higher
+
+5. **Test Connection**
+   - Check Render logs for "✓ Router connection successful"
+   - Test API: `curl https://your-app.onrender.com/api/status`
+
+#### For Port Forwarding Setup
 
 1. Wait for the build to complete (first build takes 2-3 minutes)
 2. Get your backend URL (e.g., `https://pooh-food-sms-backend.onrender.com`)
@@ -51,10 +121,13 @@
 - Check that `backend/package.json` exists
 
 **Service starts but SMS doesn't work:**
-- Verify router is accessible from internet
-- Check environment variables are set correctly
+- Verify router is accessible (ping router IP from Render shell)
+- For ZeroTier: Check both router and Render instance are authorized
+- For ZeroTier: Verify ZeroTier connection with `zerotier-cli listnetworks`
+- Check environment variables are set correctly (especially ROUTER_IP)
 - Review logs in Render dashboard
 - Test router API endpoints manually
+- Increase ROUTER_TIMEOUT for VPN connections
 
 **502 Bad Gateway or service crashes:**
 - Check logs for startup errors
@@ -62,6 +135,10 @@
 - Ensure PORT environment variable is not hardcoded
 
 ## Deploy Frontend to Vercel
+
+### Prerequisites
+- Ensure backend is deployed and working (test the `/api/status` endpoint)
+- Have backend URL ready (e.g., `https://pooh-food-sms-backend.onrender.com`)
 
 ### Vercel Deployment
 

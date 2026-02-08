@@ -15,7 +15,12 @@ Express server for SMS verification using Cudy LT500 4G LTE router.
 
 - Node.js >= 14.0.0
 - Cudy LT500 4G LTE router with SIM card
-- Router accessible on local network
+- Router accessible on local network or via ZeroTier VPN
+
+**Network Options:**
+- **Local Network**: Router on same LAN (e.g., 192.168.10.1)
+- **ZeroTier VPN**: Remote access via ZeroTier (see [ZEROTIER_VPN_SETUP.md](../ZEROTIER_VPN_SETUP.md))
+- **Port Forwarding**: Router accessible via public IP (requires proper security)
 
 ## Installation
 
@@ -36,10 +41,14 @@ cp .env.example .env
 
 4. Configure your router settings in `.env`:
 ```env
-ROUTER_IP=192.168.10.1      # Your router's IP address
+# Local Network Setup
+ROUTER_IP=192.168.10.1      # Your router's local IP address
 ROUTER_USER=admin            # Router admin username
 ROUTER_PASS=admin            # Router admin password
 PORT=3000                    # Server port
+
+# OR for ZeroTier VPN Setup (see ZEROTIER_VPN_SETUP.md)
+# ROUTER_IP=10.147.20.2     # Router's ZeroTier IP address
 ```
 
 ## Usage
@@ -134,8 +143,10 @@ Check server and router connectivity.
 ### Cannot connect to router
 1. Verify router IP address is correct
 2. Check router is powered on and accessible
-3. Test connectivity: `ping 192.168.10.1`
+3. Test connectivity: `ping 192.168.10.1` (or ZeroTier IP)
 4. Verify router admin credentials
+5. **For ZeroTier**: Check ZeroTier connection with `sudo zerotier-cli listnetworks`
+6. **For ZeroTier**: Verify both devices authorized in network dashboard
 
 ### SMS not being sent
 1. Check SIM card is inserted and has credit
@@ -158,8 +169,9 @@ For production use, consider:
 - Add comprehensive logging
 - Use PM2 for process management
 - Set up Nginx reverse proxy
+- **Use ZeroTier VPN for remote router access** (see [ZEROTIER_VPN_SETUP.md](../ZEROTIER_VPN_SETUP.md))
 
-See main `SMS_SETUP.md` for full deployment instructions.
+See main [SMS_SETUP.md](../SMS_SETUP.md) for full deployment instructions.
 
 ## Dependencies
 

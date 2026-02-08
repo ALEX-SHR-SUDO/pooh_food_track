@@ -1,20 +1,26 @@
 services:
   # Backend SMS Server
-  # Note: Using explicit 'cd backend &&' instead of rootDir due to Render platform issues
-  # with rootDir not being respected during build phase
+  # Supports both local network and ZeroTier VPN connections
   - type: web
     name: pooh-food-sms-backend
     env: node
     buildCommand: cd backend && npm install
-    startCommand: cd backend && npm start
+    startCommand: cd backend && bash start.sh
     envVars:
       - key: NODE_VERSION
         value: 25.6.0
       - key: PORT
         generateValue: true
+      # Router Configuration
       - key: ROUTER_IP
         sync: false
       - key: ROUTER_USER
         sync: false
       - key: ROUTER_PASS
+        sync: false
+      - key: ROUTER_TIMEOUT
+        value: 10000
+      # Optional: ZeroTier VPN Configuration
+      # Uncomment and set ZEROTIER_NETWORK_ID to enable VPN connection
+      - key: ZEROTIER_NETWORK_ID
         sync: false

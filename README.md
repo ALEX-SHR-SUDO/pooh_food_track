@@ -1,6 +1,16 @@
 # ร้านอาหารไทยพื้นบ้าน - ระบบติดตามอาหาร 🍜
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ALEX-SHR-SUDO/pooh_food_track)
+[![ZeroTier VPN](https://img.shields.io/badge/ZeroTier-VPN_Enabled-blue)](ZEROTIER_VPN_SETUP.md)
+[![Cudy LT500](https://img.shields.io/badge/Cudy-LT500_Compatible-green)](SMS_SETUP.md)
+
+## 🚀 Quick Start
+
+**New here?** Start with the [Getting Started Guide](GETTING_STARTED.md)
+
+**Using ZeroTier VPN?** See [Quick Start with ZeroTier](QUICKSTART_ZEROTIER.md) (15 minutes)
+
+**Troubleshooting?** Check the [Troubleshooting Checklist](TROUBLESHOOTING.md)
 
 ## คำอธิบาย
 เว็บแอปพลิเคชันสำหรับร้านอาหารไทยพื้นบ้าน ที่ช่วยในการติดตามและสั่งอาหารออนไลน์ พัฒนาด้วย HTML, CSS และ JavaScript แบบมืออาชีพ พร้อมการออกแบบที่ใช้สีธงชาติไทย (แดง-ขาว-น้ำเงิน) และองค์ประกอบวัฒนธรรมไทยอย่างมีระดับ
@@ -67,9 +77,11 @@
 - จำกัดความพยายาม 3 ครั้ง
 - Rate limiting ป้องกันการส่งซ้ำ
 - เก็บ session ใน localStorage
+- รองรับ ZeroTier VPN สำหรับการเชื่อมต่อระยะไกล
 
 **การติดตั้ง:**
-ดูคู่มือฉบับเต็มที่ [SMS_SETUP.md](SMS_SETUP.md)
+- **Local Network**: ดูคู่มือฉบับเต็มที่ [SMS_SETUP.md](SMS_SETUP.md)
+- **Remote via ZeroTier VPN**: ดูคู่มือที่ [ZEROTIER_VPN_SETUP.md](ZEROTIER_VPN_SETUP.md)
 
 **Quick Start:**
 ```bash
@@ -81,12 +93,19 @@ cp .env.example .env
 npm start
 ```
 
+**For detailed setup instructions:**
+- 📖 [Getting Started Guide](GETTING_STARTED.md) - Complete setup guide
+- ⚡ [Quick Start with ZeroTier](QUICKSTART_ZEROTIER.md) - 15-minute VPN setup
+- 📱 [SMS Setup Guide](SMS_SETUP.md) - Full SMS configuration
+- 🌐 [ZeroTier VPN Guide](ZEROTIER_VPN_SETUP.md) - Detailed VPN documentation
+
 ## 🚀 เทคโนโลยีที่ใช้
 - HTML5 (Semantic markup with SEO optimization)
 - CSS3 (Gradient, Flexbox, Grid, Animations, Thai-inspired design)
 - JavaScript (ES6+ with OOP patterns)
 - Node.js + Express (Backend SMS server)
 - Cudy LT500 4G LTE Router (SMS Gateway)
+- ZeroTier VPN (Optional - for remote router access)
 - Professional code structure (separated files)
 - Responsive Design
 - Vercel deployment ready
@@ -100,6 +119,7 @@ pooh_food_track/
 ├── backend/            # SMS Backend Server
 │   ├── cudy-lt500-api.js      # Cudy Router API client
 │   ├── cudy-sms-server.js     # Express SMS server
+│   ├── start.sh               # Startup script with ZeroTier support
 │   ├── package.json           # Backend dependencies
 │   ├── .env.example           # Environment template
 │   └── README.md              # Backend documentation
@@ -107,9 +127,13 @@ pooh_food_track/
 │   ├── meat1.png       # Header image
 │   └── ...
 ├── vercel.json         # Vercel deployment configuration
-├── README.md           # Project documentation
+├── render.yaml         # Render deployment configuration
+├── README.md           # Project documentation (This file)
+├── GETTING_STARTED.md  # Complete getting started guide
+├── QUICKSTART_ZEROTIER.md # Quick ZeroTier VPN setup (15 min)
 ├── SMS_SETUP.md        # SMS authentication setup guide
-└── DEPLOYMENT.md       # Vercel deployment guide
+├── ZEROTIER_VPN_SETUP.md # ZeroTier VPN configuration guide
+└── DEPLOYMENT.md       # Production deployment guide
 ```
 
 ## 🎨 Thai Cultural Design Elements
