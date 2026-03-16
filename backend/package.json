@@ -1,31 +1,26 @@
 {
-  "name": "pooh-food-sms-backend",
-  "version": "1.0.0",
-  "description": "SMS verification backend for POOH Food using Cudy LT500 4G LTE router",
-  "main": "cudy-sms-server.js",
+  "name": "pooh-food-whatsapp-backend",
+  "version": "2.0.0",
+  "description": "WhatsApp verification backend for POOH Food using Twilio WhatsApp API",
+  "main": "whatsapp-server.js",
   "scripts": {
-    "start": "node cudy-sms-server.js",
-    "dev": "nodemon cudy-sms-server.js",
+    "start": "node whatsapp-server.js",
+    "dev": "nodemon whatsapp-server.js",
     "test": "echo \"No tests specified\" && exit 0"
   },
   "keywords": [
-    "sms",
-    "cudy",
-    "lt500",
+    "whatsapp",
+    "twilio",
     "verification",
-    "authentication",
-    "openwrt",
-    "luci"
+    "authentication"
   ],
   "author": "POOH Food",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.18.2",
     "cors": "^2.8.5",
-    "node-fetch": "^2.7.0",
-    "tough-cookie": "^4.1.3",
-    "fetch-cookie": "^2.1.0",
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "twilio": "^5.13.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

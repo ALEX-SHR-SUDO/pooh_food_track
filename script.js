@@ -65,11 +65,11 @@ const translations = {
         product14: "ไส้กรอกเนื้อเผ็ด",
         perKg: "/กก.",
         // Authentication
-        loginBtn: "เข้าสู่ระบบด้วยเบอร์โทร",
+        loginBtn: "เข้าสู่ระบบด้วย WhatsApp",
         logoutBtn: "ออกจากระบบ",
-        requireAuth: "กรุณาเข้าสู่ระบบด้วยเบอร์โทรศัพท์เพื่อยืนยันคำสั่งซื้อ",
-        phoneModalTitle: "📱 เข้าสู่ระบบด้วยเบอร์โทร",
-        phoneInputLabel: "หมายเลขโทรศัพท์",
+        requireAuth: "กรุณาเข้าสู่ระบบด้วย WhatsApp เพื่อยืนยันคำสั่งซื้อ",
+        phoneModalTitle: "💬 เข้าสู่ระบบด้วย WhatsApp",
+        phoneInputLabel: "หมายเลข WhatsApp",
         phoneInputPlaceholder: "+972501234567",
         sendCodeBtn: "ส่งรหัสยืนยัน",
         codeModalTitle: "🔐 กรอกรหัสยืนยัน",
@@ -138,11 +138,11 @@ const translations = {
         product14: "Острые говяжьи сосиски",
         perKg: "/за кг",
         // Authentication
-        loginBtn: "Войти по телефону",
+        loginBtn: "Войти через WhatsApp",
         logoutBtn: "Выйти",
-        requireAuth: "Пожалуйста, войдите в систему с номером телефона для подтверждения заказа",
-        phoneModalTitle: "📱 Войти по телефону",
-        phoneInputLabel: "Номер телефона",
+        requireAuth: "Пожалуйста, войдите через WhatsApp для подтверждения заказа",
+        phoneModalTitle: "💬 Войти через WhatsApp",
+        phoneInputLabel: "Номер WhatsApp",
         phoneInputPlaceholder: "+972501234567",
         sendCodeBtn: "Отправить код",
         codeModalTitle: "🔐 Введите код подтверждения",
@@ -453,7 +453,7 @@ class FoodOrderSystem {
 
 /**
  * Phone Authentication System
- * Handles SMS verification for customer authentication
+ * Handles WhatsApp verification for customer authentication
  */
 class PhoneAuthSystem {
     constructor() {
@@ -478,7 +478,7 @@ class PhoneAuthSystem {
             // User is logged in - show user info
             authSection.innerHTML = `
                 <div class="user-info">
-                    <span class="user-phone">📱 ${this.escapeHtml(this.userPhone)}</span>
+                    <span class="user-phone">💬 ${this.escapeHtml(this.userPhone)}</span>
                     <button class="logout-btn" onclick="phoneAuth.logout()">
                         <span data-i18n="logoutBtn">ออกจากระบบ</span>
                     </button>
@@ -488,7 +488,7 @@ class PhoneAuthSystem {
             // User is not logged in - show login button
             authSection.innerHTML = `
                 <button class="login-btn" onclick="phoneAuth.showPhoneModal()">
-                    <span data-i18n="loginBtn">เข้าสู่ระบบด้วยเบอร์โทร</span>
+                    <span data-i18n="loginBtn">เข้าสู่ระบบด้วย WhatsApp</span>
                 </button>
             `;
         }
